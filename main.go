@@ -1,7 +1,7 @@
 package main
 
 import (
-	"caesar-go/caesartest/bitmex"
+	"caesar-go/note/objects/child"
 	"fmt"
 )
 
@@ -35,6 +35,6 @@ func main() {
 	intss := make([]int, 2)
 	fmt.Println(intss)
 
-	bitmex.UpdateIN(intss, 3)
+	child.UpdateIN(intss, 3)
 	fmt.Println(intss)
 }
