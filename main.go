@@ -1,10 +1,5 @@
 package main
 
-import (
-	"caesar-go/note/objects/child"
-	"fmt"
-)
-
 func main() {
 	//lasa := []string{
 	//    "aaa",
@@ -32,9 +27,10 @@ func main() {
 	//maps := make(map[string][]int)
 	//maps["aaa"] = []int{123, 234}
 	//fmt.Println(maps)
-	intss := make([]int, 2)
-	fmt.Println(intss)
 
-	child.UpdateIN(intss, 3)
-	fmt.Println(intss)
+	//intss := make([]int, 2)
+	//fmt.Println(intss)
+	//
+	//child.UpdateIN(intss, 3)
+	//fmt.Println(intss)
 }
