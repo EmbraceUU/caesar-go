@@ -1,5 +1,10 @@
 package main
 
+import (
+	"caesar-go/note/constant"
+	"fmt"
+)
+
 func main() {
 	//lasa := []string{
 	//    "aaa",
@@ -33,4 +38,7 @@ func main() {
 	//
 	//child.UpdateIN(intss, 3)
 	//fmt.Println(intss)
+
+	fmt.Println(constant.SymbolStatus_Black)
+	fmt.Println(constant.SymbolStatus_Black1)
 }

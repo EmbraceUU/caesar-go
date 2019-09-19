@@ -19,3 +19,10 @@ func ArrDefineStructZero() {
 	fmt.Println(len(arrStruct))
 	// 0
 }
+
+// for循环非迭代的格式
+func ArrForIndex() {
+	for index := 0; index < 100; index++ {
+		fmt.Println(index)
+	}
+}
