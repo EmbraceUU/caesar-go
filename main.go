@@ -1,7 +1,7 @@
 package main
 
 import (
-	"caesar-go/note/constant"
+	_map "caesar-go/note/map"
 	"fmt"
 )
 
@@ -39,6 +39,9 @@ func main() {
 	//child.UpdateIN(intss, 3)
 	//fmt.Println(intss)
 
-	fmt.Println(constant.SymbolStatus_Black)
-	fmt.Println(constant.SymbolStatus_Black1)
+	testMap := make(map[string]string)
+	testMap["a"] = "aaaa"
+	testMap["b"] = "bbbb"
+	_map.TestMap(testMap)
+	fmt.Println(testMap)
 }
