@@ -3,21 +3,15 @@ package array
 import "fmt"
 
 // 定义后的arr的零值是什么
-func ArrDefineZero() {
+func ArrDefineZero() []string {
 	var arrStr []string
-	fmt.Println(arrStr)
-	// []
-	fmt.Println(len(arrStr))
-	// 0
+	return arrStr
 }
 
 // 定义后的arr[结构体]的零值是什么
-func ArrDefineStructZero() {
+func ArrDefineStructZero() []ArrStr {
 	var arrStruct []ArrStr
-	fmt.Println(arrStruct)
-	// []
-	fmt.Println(len(arrStruct))
-	// 0
+	return arrStruct
 }
 
 // for循环非迭代的格式
