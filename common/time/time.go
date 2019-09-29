@@ -5,22 +5,27 @@ import (
 )
 
 const (
-	LayoutStr  = "2006-01-02 15:04:05"
-	DateFormat = "2006-01-02"
+	LayoutStr    = "2006-01-02T15:04:05.000Z"
+	LayoutStrSec = "2006-01-02 15:04:05"
+	DateFormat   = "2006-01-02"
 )
 
 // 字符串转时间戳, 加时区设置
-// "Asia/Chongqing" "2019-09-05 14:40:23"
 func StrToTimestampLoc(locName, dateStr string) int64 {
 	loc, _ := time.LoadLocation(locName)
-	tm2, _ := time.ParseInLocation(LayoutStr, dateStr, loc)
+	tm2, _ := time.ParseInLocation(LayoutStrSec, dateStr, loc)
 	return tm2.Unix()
 }
 
 // 获取当前日期, 加时区设置
-// "Asia/Chongqing"
 func GetDateNowLoc(locName string) string {
 	loc, _ := time.LoadLocation(locName)
 	data := time.Now().In(loc).Format(DateFormat)
 	return data
+}
+
+// UTC字符串转时间戳
+func StrToTimestampUTC(dateStr string) int64 {
+	t, _ := time.Parse(LayoutStr, dateStr)
+	return t.Unix()
 }
