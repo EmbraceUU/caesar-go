@@ -11,3 +11,15 @@ func Replace() string {
 func Contains(s, subs string) bool {
 	return strings.Contains(s, subs)
 }
+
+func SubStr(items []string) string {
+	var subStr string
+	for index, item := range items {
+		if index == 0 {
+			subStr = item
+			continue
+		}
+		subStr = subStr + "_" + item
+	}
+	return subStr
+}

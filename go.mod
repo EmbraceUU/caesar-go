@@ -30,6 +30,7 @@ require (
 	github.com/panjf2000/ants v1.1.1
 	github.com/pkg/errors v0.8.1
 	github.com/rifflock/lfshook v0.0.0-20180920164130-b9218ef580f5
+	github.com/shopspring/decimal v0.0.0-20191009025716-f1972eb1d1f5
 	github.com/sirupsen/logrus v1.4.2
 	github.com/streadway/amqp v0.0.0-20190815230801-eade30b20f1d
 	github.com/stretchr/objx v0.2.0 // indirect
