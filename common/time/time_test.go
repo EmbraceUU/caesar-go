@@ -20,3 +20,7 @@ func TestStrToTimestampUTC(t *testing.T) {
 	timeStr := "2019-09-05T14:40:23.000Z"
 	fmt.Println(StrToTimestampUTC(timeStr))
 }
+
+func TestNowTs(t *testing.T) {
+	fmt.Println(NowTs())
+}

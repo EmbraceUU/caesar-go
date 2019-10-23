@@ -29,3 +29,14 @@ func StrToTimestampUTC(dateStr string) int64 {
 	t, _ := time.Parse(LayoutStr, dateStr)
 	return t.Unix()
 }
+
+func BeforeTs(ts, step int64) int64 {
+	if ts < step {
+		return ts
+	}
+	return ts - step
+}
+
+func NowTs() int {
+	return int(time.Now().Unix())
+}

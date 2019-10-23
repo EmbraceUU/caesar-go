@@ -9,3 +9,7 @@ func TestGetBoolStruct(t *testing.T) {
 	sc := GetBoolStruct()
 	fmt.Println(sc)
 }
+
+func TestGetPairHttpData(t *testing.T) {
+	GetPairHttpData()
+}
