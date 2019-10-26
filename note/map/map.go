@@ -7,6 +7,12 @@ func TestMap(curMap map[string]string) {
 	}
 }
 
+func WriteMap(filed, key string, value float64) map[string]map[string]float64 {
+	diMap := make(map[string]map[string]float64)
+	diMap[filed][key] = value
+	return diMap
+}
+
 // note
 // 如果用map作为cache, 那么返回数据时不要直接将map返回
 // 应该生成一个新的map返回出去,

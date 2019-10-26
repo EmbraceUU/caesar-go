@@ -24,3 +24,7 @@ func TestStrToTimestampUTC(t *testing.T) {
 func TestNowTs(t *testing.T) {
 	fmt.Println(NowTs())
 }
+
+func TestSplitTimelineTimestamp(t *testing.T) {
+	SplitTimelineTimestamp(1572065533, 1572077520, 60, 1572078667, 2)
+}
