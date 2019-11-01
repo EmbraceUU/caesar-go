@@ -21,3 +21,7 @@ func TestSubStr(t *testing.T) {
 	strItem := strings.Split(str, "_")
 	fmt.Println(SubStr(strItem[1:]))
 }
+
+func TestAppend(t *testing.T) {
+	Append()
+}

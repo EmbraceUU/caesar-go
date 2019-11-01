@@ -20,3 +20,53 @@ func ArrForIndex() {
 		fmt.Println(index)
 	}
 }
+
+var (
+	constMap = make(map[string][]ArrStr)
+)
+
+// 测试切片的指针
+func MapArrStructPoint() {
+	arrMap := make(map[string][]ArrStr)
+	arrMap["k1"] = []ArrStr{
+		{
+			String1: "s11",
+			String2: "s12",
+		},
+		{
+			String1: "s13",
+			String2: "s14",
+		},
+	}
+	arrMap["k2"] = []ArrStr{
+		{
+			String1: "s21",
+			String2: "s22",
+		},
+		{
+			String1: "s23",
+			String2: "s24",
+		},
+	}
+	a1 := arrMap["k1"]
+	a1 = append(a1, ArrStr{
+		String1: "s15",
+		String2: "s16",
+	})
+
+	constMap["k3"] = []ArrStr{
+		{
+			String1: "s31",
+			String2: "s32",
+		},
+		{
+			String1: "s33",
+			String2: "s34",
+		},
+	}
+
+	constMap = arrMap
+	fmt.Println(constMap)
+	fmt.Println(arrMap)
+	fmt.Println(a1)
+}

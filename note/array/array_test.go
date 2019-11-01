@@ -20,3 +20,7 @@ func TestArrDefineStructZero(t *testing.T) {
 func TestArrForIndex(t *testing.T) {
 	ArrForIndex()
 }
+
+func TestMapArrStructPoint(t *testing.T) {
+	MapArrStructPoint()
+}

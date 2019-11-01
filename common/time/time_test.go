@@ -3,6 +3,7 @@ package time
 import (
 	"fmt"
 	"testing"
+	"time"
 )
 
 func TestGetDateNowLoc(t *testing.T) {
@@ -17,12 +18,14 @@ func TestStrToTimestampLoc(t *testing.T) {
 }
 
 func TestStrToTimestampUTC(t *testing.T) {
-	timeStr := "2019-09-05T14:40:23.000Z"
+	timeStr := "20191030"
 	fmt.Println(StrToTimestampUTC(timeStr))
 }
 
 func TestNowTs(t *testing.T) {
-	fmt.Println(NowTs())
+	//fmt.Println(NowTs())
+	_, month, day := time.Unix(int64(1577448000), 0).UTC().Date()
+	fmt.Println(int(month), day)
 }
 
 func TestSplitTimelineTimestamp(t *testing.T) {

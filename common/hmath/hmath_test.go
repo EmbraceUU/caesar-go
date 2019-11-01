@@ -1,6 +1,7 @@
 package hmath
 
 import (
+	"fmt"
 	"math/rand"
 	"testing"
 )
@@ -51,4 +52,8 @@ func BenchmarkCombinationParallel(b *testing.B) {
 			Combination(m, n)
 		}
 	})
+}
+
+func TestCompareFloat(t *testing.T) {
+	fmt.Println(CompareFloat(6.08, 2.08, 0.2))
 }

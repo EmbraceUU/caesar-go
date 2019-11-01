@@ -2,6 +2,7 @@ package time
 
 import (
 	"caesar-go/common/timeline"
+	"log"
 	"math"
 	"time"
 )
@@ -28,7 +29,12 @@ func GetDateNowLoc(locName string) string {
 
 // UTC字符串转时间戳
 func StrToTimestampUTC(dateStr string) int64 {
-	t, _ := time.Parse(LayoutStr, dateStr)
+	d := dateStr + "T08:00:00.000Z"
+	t, err := time.Parse(LayoutStr, d)
+	if err != nil {
+		log.Println(err.Error())
+		return 0
+	}
 	return t.Unix()
 }
 
