@@ -7,7 +7,7 @@ import (
 )
 
 func TestReplace(t *testing.T) {
-	fmt.Println(Replace())
+	fmt.Println(Replace(1))
 }
 
 func TestContains(t *testing.T) {

@@ -5,10 +5,10 @@ import (
 	"strings"
 )
 
-func Replace() string {
-	symbol := "XBTUSD"
-	root := "XBT"
-	return strings.Replace(symbol, root, "", -1)
+func Replace(n int) string {
+	symbol := "XBT_USD_AAA_BBB"
+	root := "_"
+	return strings.Replace(symbol, root, ".", n)
 }
 
 func Contains(s, subs string) bool {

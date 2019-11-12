@@ -1,16 +1,21 @@
 package _map
 
-import "sync"
+import (
+	"sync"
+)
 
 var (
-	TMap map[string]map[string]string
+	TMap map[string]*AAA
 	TMm  = new(sync.RWMutex)
 )
 
-func WriteMap(filed, key string, value float64) map[string]map[string]float64 {
-	diMap := make(map[string]map[string]float64)
-	diMap[filed][key] = value
-	return diMap
+// 使用指针的话, 只获得指针, 然后进行操作, 不用重新再赋值 ?
+type AAA struct {
+	D map[string]string
+}
+
+func WriteMap(key string, data *AAA) {
+	TMap[key] = data
 }
 
 // note
@@ -19,28 +24,29 @@ func WriteMap(filed, key string, value float64) map[string]map[string]float64 {
 // 因为如果外部的调用方进行delete操作, 是直接操作的cache map
 
 func InitMap() {
-	TMap = make(map[string]map[string]string)
+	TMap = make(map[string]*AAA)
 }
 
-func ReadMap(key string) map[string]string {
+func ReadMap(key string) *AAA {
 	TMm.RLock()
 	defer TMm.RUnlock()
 
-	item, ok := TMap[key]
+	item, _ := TMap[key]
 	//res := make(map[string]string)
 	//if ok {
 	//    // 这样赋值, 返回的map在发生改变后, 依然会影响TMap, 这说明赋值的是指针, 而非值
 	//    res = item
 	//    return res
 	//}
+	return item
 
 	// 做值赋值, 不会受TMap的影响
-	res := make(map[string]string)
-	if ok {
-		for k, v := range item {
-			res[k] = v
-		}
-		return res
-	}
-	return nil
+	//res := make(map[string]string)
+	//if ok {
+	//	for k, v := range item {
+	//		res[k] = v
+	//	}
+	//	return res
+	//}
+	//return nil
 }
