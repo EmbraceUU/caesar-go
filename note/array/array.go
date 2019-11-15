@@ -70,3 +70,31 @@ func MapArrStructPoint() {
 	fmt.Println(arrMap)
 	fmt.Println(a1)
 }
+
+func SubStrArr() {
+	arr := []int{2, 3, 4, 5, 6, 76, 8}
+	arrNew := arr[0:5]
+	fmt.Println(arr)
+	fmt.Println(arrNew)
+	fmt.Println(fmt.Sprintf("arr: %p", arr))
+	fmt.Println(fmt.Sprintf("arrNew: %p", arrNew))
+}
+
+func NewCurElement(curListOld, curListNew []string) []string {
+	result := make([]string, 0, len(curListOld))
+	temp := map[string]struct{}{}
+	// 先将旧的curList存入 map
+	for _, item := range curListOld {
+		if _, ok := temp[item]; !ok {
+			temp[item] = struct{}{}
+		}
+	}
+	// 然后遍历新的,  如果有新的有不存在的key, 加入result
+	for _, item := range curListNew {
+		if _, ok := temp[item]; !ok {
+			temp[item] = struct{}{}
+			result = append(result, item)
+		}
+	}
+	return result
+}

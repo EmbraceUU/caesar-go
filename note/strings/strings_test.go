@@ -25,3 +25,7 @@ func TestSubStr(t *testing.T) {
 func TestAppend(t *testing.T) {
 	Append()
 }
+
+func TestHasPrefix(t *testing.T) {
+	fmt.Println(HasPrefix("34ETH_USDT", "4"))
+}

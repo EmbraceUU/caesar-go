@@ -24,3 +24,14 @@ func TestArrForIndex(t *testing.T) {
 func TestMapArrStructPoint(t *testing.T) {
 	MapArrStructPoint()
 }
+
+func TestSubStrArr(t *testing.T) {
+	SubStrArr()
+}
+
+func TestNewCurElement(t *testing.T) {
+	curListOld := []string{"btc", "eth", "eos", "win", "block", "bloc", "hot", "leo"}
+	curListNew := []string{"btc", "eth", "eos", "win", "block", "bloc", "hot", "leo"}
+	fmt.Println(NewCurElement(curListOld, curListNew))
+	fmt.Println(len(NewCurElement(curListOld, curListNew)))
+}

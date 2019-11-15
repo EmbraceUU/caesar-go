@@ -6,9 +6,9 @@ import (
 )
 
 func Replace(n int) string {
-	symbol := "XBT_USD_AAA_BBB"
-	root := "_"
-	return strings.Replace(symbol, root, ".", n)
+	symbol := "ETH_USDT"
+	root := "."
+	return strings.Replace(symbol, root, "_", n)
 }
 
 func Contains(s, subs string) bool {
@@ -38,4 +38,9 @@ func Append() {
 	StrArrP = append(StrArrP, str2)
 	StrArrP = append(StrArrP, str3)
 	fmt.Println(StrArrP)
+
+}
+
+func HasPrefix(s, pre string) bool {
+	return strings.HasPrefix(s, pre)
 }
