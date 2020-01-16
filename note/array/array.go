@@ -21,6 +21,10 @@ func ArrForIndex() {
 	}
 }
 
+func ArrCut(arrStr []string, curIndex int) []string {
+	return append(arrStr[:curIndex], arrStr[curIndex+1:]...)
+}
+
 var (
 	constMap = make(map[string][]ArrStr)
 )

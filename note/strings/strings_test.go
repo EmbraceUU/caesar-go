@@ -29,3 +29,12 @@ func TestAppend(t *testing.T) {
 func TestHasPrefix(t *testing.T) {
 	fmt.Println(HasPrefix("34ETH_USDT", "4"))
 }
+
+func TestKeyToExAndSymbol(t *testing.T) {
+	ex, sy, err := KeyToExAndSymbol("")
+	if err != nil {
+		fmt.Print(err.Error())
+	} else {
+		fmt.Print(fmt.Sprintf("%s %s", ex, sy))
+	}
+}

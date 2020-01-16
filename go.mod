@@ -11,9 +11,17 @@ replace (
 )
 
 require (
+	github.com/go-errors/errors v1.0.1 // indirect
+	github.com/lunixbochs/vtclean v1.0.0 // indirect
+	github.com/pkg/errors v0.9.0 // indirect
 	github.com/shopspring/decimal v0.0.0-20191009025716-f1972eb1d1f5
-	golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2 // indirect
+	github.com/stretchr/testify v1.4.0 // indirect
+	github.com/viant/afs v0.12.0 // indirect
+	github.com/viant/assertly v0.5.1 // indirect
+	github.com/viant/toolbox v0.29.1
+	golang.org/x/oauth2 v0.0.0-20200107190931-bf48bf16ab8d // indirect
 	golang.org/x/time v0.0.0-20180412165947-fbb02b2291d2
+	gopkg.in/yaml.v2 v2.2.7 // indirect
 )
 
 go 1.12

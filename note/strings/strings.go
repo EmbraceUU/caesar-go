@@ -1,8 +1,10 @@
 package strings
 
 import (
+	"errors"
 	"fmt"
 	"strings"
+	"unicode"
 )
 
 func Replace(n int) string {
@@ -43,4 +45,26 @@ func Append() {
 
 func HasPrefix(s, pre string) bool {
 	return strings.HasPrefix(s, pre)
+}
+
+func KeyToExAndSymbol(key string) (string, string, error) {
+	if key == "" {
+		return key, key, errors.New("key to exchange and symbol is nil")
+	}
+	items := strings.Split(key, "_")
+	if len(items) < 3 {
+		return "", "", errors.New(fmt.Sprintf("key to exchange and symbol is err: %s", key))
+	}
+	exchange := items[0]
+	symbol := strings.Replace(key, fmt.Sprintf("%s_", exchange), "", 1)
+	return exchange, symbol, nil
+}
+
+func IsHan(key string) bool {
+	for _, r := range key {
+		if unicode.Is(unicode.Scripts["Han"], r) {
+			return true
+		}
+	}
+	return false
 }
