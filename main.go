@@ -1,9 +1,7 @@
 package main
 
-import (
-	"caesar-go/net"
-)
+import "fmt"
 
 func main() {
-	net.ListenSetup()
+	fmt.Println("hello golang! ")
 }
