@@ -1,7 +1,6 @@
 package time
 
 import (
-	"caesar-go/common/timeline"
 	"log"
 	"math"
 	"time"
@@ -12,6 +11,11 @@ const (
 	LayoutStrSec = "2006-01-02 15:04:05"
 	DateFormat   = "2006-01-02"
 )
+
+type Segment struct {
+	Start int
+	End   int
+}
 
 // 字符串转时间戳, 加时区设置
 func StrToTimestampLoc(locName, dateStr string) int64 {
@@ -38,7 +42,7 @@ func StrToTimestampUTC(dateStr string) int64 {
 	return t.Unix()
 }
 
-func SplitTimelineTimestamp(startTs, endTs, step, nowTs, splitSize int) (head, body *timeline.Segment) {
+func SplitTimelineTimestamp(startTs, endTs, step, nowTs, splitSize int) (head, body *Segment) {
 	sgStart := CeilNthTimestamp(startTs, step)
 	sgEnd := CeilNthTimestamp(endTs, step)
 	mid := NthTimestamp(nowTs, step) - splitSize
@@ -51,19 +55,19 @@ func SplitTimelineTimestamp(startTs, endTs, step, nowTs, splitSize int) (head, b
 	return
 }
 
-func splitHeadBody(start, end, mid, sgStart, sgEnd, sgMid int) (head, body *timeline.Segment) {
+func splitHeadBody(start, end, mid, sgStart, sgEnd, sgMid int) (head, body *Segment) {
 	if mid <= start {
-		head = &timeline.Segment{sgStart, sgEnd}
+		head = &Segment{sgStart, sgEnd}
 		return
 	}
 
 	if mid >= end {
-		body = &timeline.Segment{sgStart, sgEnd}
+		body = &Segment{sgStart, sgEnd}
 		return
 	}
 
-	head = &timeline.Segment{sgMid, sgEnd}
-	body = &timeline.Segment{sgStart, sgMid}
+	head = &Segment{sgMid, sgEnd}
+	body = &Segment{sgStart, sgMid}
 	return
 }
 
