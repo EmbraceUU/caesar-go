@@ -3,6 +3,9 @@ package main
 import (
 	pb "caesar-go/consignment-service/proto/consignment"
 	"context"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
+	"net"
 )
 
 const (
@@ -39,5 +42,21 @@ func (s *service) CreateConsignment(ctx context.Context, req *pb.Consignment) (*
 }
 
 func main() {
+	repo := &Repository{}
 
+	// 增加tcp的端口监听
+	lis, err := net.Listen("tcp", port)
+	if err != nil {
+		panic(err)
+	}
+
+	// 创建一个服务
+	s := grpc.NewServer()
+	// 将service注册到服务中
+	pb.RegisterShippingServiceServer(s, &service{repo: repo})
+	// 服务注册reflection
+	reflection.Register(s)
+	if err := s.Serve(lis); err != nil {
+		panic(err)
+	}
 }
