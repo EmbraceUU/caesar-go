@@ -31,3 +31,8 @@ func TestNowTs(t *testing.T) {
 func TestSplitTimelineTimestamp(t *testing.T) {
 	SplitTimelineTimestamp(1572065533, 1572077520, 60, 1572078667, 2)
 }
+
+func TestUTCStringToTime(t *testing.T) {
+	data := UTCStringToTime("2020-03-23T04:55:43.109Z").Unix() * 1000
+	println(data)
+}

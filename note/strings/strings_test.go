@@ -38,3 +38,7 @@ func TestKeyToExAndSymbol(t *testing.T) {
 		fmt.Print(fmt.Sprintf("%s %s", ex, sy))
 	}
 }
+
+func TestHasDigit(t *testing.T) {
+	println(HasDigit("GBTC123123BTC"))
+}

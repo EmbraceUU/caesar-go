@@ -3,6 +3,7 @@ package strings
 import (
 	"errors"
 	"fmt"
+	"regexp"
 	"strings"
 	"unicode"
 )
@@ -67,4 +68,9 @@ func IsHan(key string) bool {
 		}
 	}
 	return false
+}
+
+func HasDigit(key string) bool {
+	matchDigit, _ := regexp.Match(`[\d]`, []byte(key))
+	return matchDigit
 }

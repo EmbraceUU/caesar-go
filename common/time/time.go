@@ -203,3 +203,14 @@ func BeforeTs(ts, step int) int {
 	}
 	return ts - step
 }
+
+func UTCStringToTime(ts string) time.Time {
+	timestamp, err := time.Parse(time.RFC3339, ts)
+	if err != nil {
+		log.Println("parse Timestamp err", ts, err)
+		timestamp = time.Now()
+	} else {
+		timestamp.In(time.Local)
+	}
+	return timestamp
+}
