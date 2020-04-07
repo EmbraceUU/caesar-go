@@ -43,4 +43,4 @@ require (
 	rsc.io/sampler v1.99.99 // indirect
 )
 
-go 1.12
+go 1.13.5
