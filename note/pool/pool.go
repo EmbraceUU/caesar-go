@@ -50,6 +50,7 @@ func NewTimingPool(size, expiry int) (*Pool, error) {
 	if expiry <= 0 {
 		return nil, ErrInvalidPoolExpiry
 	}
+
 	p := &Pool{
 		capacity:       int32(size),
 		expiryDuration: time.Duration(expiry) * time.Second,
