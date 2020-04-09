@@ -3,12 +3,14 @@ package pool
 import (
 	"errors"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
 var (
 	ErrInvalidPoolSize   = errors.New("invalid size for pool")
 	ErrInvalidPoolExpiry = errors.New("invalid expiry for pool")
+	ErrPoolClosed        = errors.New("pool is closed")
 )
 
 type sig struct{}
@@ -57,4 +59,78 @@ func NewTimingPool(size, expiry int) (*Pool, error) {
 		release:        make(chan sig, 1),
 	}
 	return p, nil
+}
+
+func (p *Pool) Submit(task f) error {
+	if len(p.release) > 0 {
+		return ErrPoolClosed
+	}
+	w := p.getWorker()
+	w.task <- task
+	return nil
+}
+
+func (p *Pool) getWorker() *Worker {
+	var w *Worker
+	waiting := false
+	p.lock.Lock()
+	idleWorkers := p.workers
+	n := len(idleWorkers) - 1
+
+	if n < 0 {
+		waiting = p.Running() >= p.Cap()
+	} else {
+		w = idleWorkers[n]
+		idleWorkers[n] = nil
+		p.workers = idleWorkers[:n]
+	}
+	p.lock.Unlock()
+
+	if waiting {
+		for {
+			p.lock.Lock()
+			idleWorkers = p.workers
+			l := len(idleWorkers) - 1
+			if l < 0 {
+				p.lock.Unlock()
+				continue
+			}
+			w = idleWorkers[l]
+			idleWorkers[l] = nil
+			p.workers = idleWorkers[:l]
+			p.lock.Unlock()
+			break
+		}
+	} else if w == nil {
+		w := &Worker{
+			pool: p,
+			task: make(chan f, 1),
+		}
+		w.run()
+		p.incRunning()
+	}
+	return w
+}
+
+func (p *Pool) putWorker(w *Worker) {
+	w.recycleTime = time.Now()
+	p.lock.Lock()
+	p.workers = append(p.workers, w)
+	p.lock.Unlock()
+}
+
+func (p *Pool) Running() int {
+	return int(atomic.LoadInt32(&p.running))
+}
+
+func (p *Pool) Cap() int {
+	return int(atomic.LoadInt32(&p.capacity))
+}
+
+func (p *Pool) incRunning() {
+	atomic.AddInt32(&p.running, 1)
+}
+
+func (p *Pool) decRunning() {
+	atomic.AddInt32(&p.running, -1)
 }
