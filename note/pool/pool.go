@@ -7,11 +7,11 @@ import (
 )
 
 var (
-	ErrInvalidPoolSize = errors.New("invalid size for pool")
+	ErrInvalidPoolSize   = errors.New("invalid size for pool")
 	ErrInvalidPoolExpiry = errors.New("invalid expiry for pool")
 )
 
-type sig struct {}
+type sig struct{}
 
 type f func() error
 
@@ -22,7 +22,7 @@ type f func() error
 3. 如何保证并发时的读写不冲突
 4. 分析每个结构体，为什么这么设计， 不能一味的用map和slice， 也不能一味的用chan
 5. 运行中的goroutine如何通过release信号停止运行
- */
+*/
 type Pool struct {
 	// capacity of the pool
 	capacity int32
@@ -44,7 +44,7 @@ func NewPool(size int) (*Pool, error) {
 }
 
 func NewTimingPool(size, expiry int) (*Pool, error) {
-	if size <=0 {
+	if size <= 0 {
 		return nil, ErrInvalidPoolSize
 	}
 	if expiry <= 0 {
@@ -54,7 +54,6 @@ func NewTimingPool(size, expiry int) (*Pool, error) {
 		capacity:       int32(size),
 		expiryDuration: time.Duration(expiry) * time.Second,
 		release:        make(chan sig, 1),
-
 	}
 	return p, nil
 }
