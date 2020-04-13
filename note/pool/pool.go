@@ -119,6 +119,48 @@ func (p *Pool) putWorker(w *Worker) {
 	p.lock.Unlock()
 }
 
+func (p *Pool) periodicallyPurge() {
+	heartbeat := time.NewTicker(p.expiryDuration)
+	for range heartbeat.C {
+		currentTime := time.Now()
+		p.lock.Lock()
+		idleWorkers := p.workers
+		if len(idleWorkers) == 0 && p.Running() == 0 && len(p.release) > 0 {
+			p.lock.Unlock()
+			return
+		}
+		n := 0
+		for i, w := range idleWorkers {
+			if currentTime.Sub(w.recycleTime) <= p.expiryDuration {
+				break
+			}
+			n = i
+			w.task <- nil
+			idleWorkers[i] = nil
+		}
+		n++
+		if n >= len(idleWorkers) {
+			p.workers = idleWorkers[:0]
+		} else {
+			p.workers = idleWorkers[n:]
+		}
+		p.lock.Unlock()
+	}
+}
+
+func (p *Pool) ReSize(size int) {
+	if size == p.Cap() {
+		return
+	}
+	atomic.StoreInt32(&p.capacity, int32(size))
+	diff := p.Running() - size
+	if diff > 0 {
+		for i := 0; i < diff; i++ {
+			p.getWorker().task <- nil
+		}
+	}
+}
+
 func (p *Pool) Running() int {
 	return int(atomic.LoadInt32(&p.running))
 }
