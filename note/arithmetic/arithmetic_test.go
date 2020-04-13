@@ -8,3 +8,7 @@ import (
 func TestReverse(t *testing.T) {
 	fmt.Println(Reverse(1563847412))
 }
+
+func TestSieve(t *testing.T) {
+	Sieve()
+}
