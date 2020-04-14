@@ -1,8 +1,8 @@
 package child
 
-import "caesar-go/note/objects"
+import "caesar-go/awesome/objects"
 
-type ChildOne struct {
+type One struct {
 	objects.Base
 }
 
