@@ -36,3 +36,7 @@ func TestUTCStringToTime(t *testing.T) {
 	data := UTCStringToTime("2020-03-23T04:55:43.109Z").Unix() * 1000
 	println(data)
 }
+
+func TestCron(t *testing.T) {
+	Cron()
+}

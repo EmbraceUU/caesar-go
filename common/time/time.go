@@ -214,3 +214,15 @@ func UTCStringToTime(ts string) time.Time {
 	}
 	return timestamp
 }
+
+// 自定义一个定时器
+func Cron() {
+	for {
+		println(time.Now().Unix())
+		now := time.Now()
+		next := now.Add(time.Second * 60)
+		next = time.Date(next.Year(), next.Month(), next.Day(), next.Hour(), next.Minute(), 0, 0, next.Location())
+		t := time.NewTimer(next.Sub(now))
+		<-t.C
+	}
+}
