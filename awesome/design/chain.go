@@ -86,7 +86,7 @@ func (h *Business03Handler) Do(c *ChainContext) error {
 	return nil
 }
 
-func Components() {
+func ChainsAction() {
 	nullHandler := &NullHandler{}
 
 	// 将不同的业务组件装配到handler中
