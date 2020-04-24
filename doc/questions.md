@@ -23,3 +23,34 @@ db.LogMode(true)
 ```gotemplate
 db.Debug().Model()...
 ```
+
+### mongo 根据id查询不到数据
+
+参数需要使用ObjectId类型
+
+```gotemplate
+db.collection.findOne({
+    '_id': ObjectId('5d4e946888f74c4d4b876dec')
+})
+```
+
+## 并发相关
+
+### map 并发读写冲突
+
+#### 频繁读, 少量的写
+
+可以使用channel将map的读写分离, 专门有一个read map, 可以频繁读
+将要写入的数据, 压入到channel中, 定时从channel中读出来写到一个write map中, 将write map一次性覆盖掉read map
+
+#### 频繁写, 少量的读
+
+直接对一个map读写锁, 暂时没想到会产生什么数据上的问题
+
+#### 读写都频繁
+
+使用sync.Map
+
+[文章1](https://juejin.im/post/5c9b93a6e51d4579e94a9477)
+
+[文章2](https://studygolang.com/articles/23370)
