@@ -1,6 +1,7 @@
 package time
 
 import (
+	"fmt"
 	"log"
 	"math"
 	"time"
@@ -224,5 +225,19 @@ func Cron() {
 		next = time.Date(next.Year(), next.Month(), next.Day(), next.Hour(), next.Minute(), 0, 0, next.Location())
 		t := time.NewTimer(next.Sub(now))
 		<-t.C
+	}
+}
+
+func Alias(timeType string, timestamp int64) string {
+	switch timeType {
+	case "day":
+		return time.Unix(timestamp, 0).Format("2006/01/02")
+	case "week":
+		_, w := time.Unix(timestamp, 0).ISOWeek()
+		return fmt.Sprintf("第%d周", w)
+	case "month":
+		return time.Unix(timestamp, 0).Format("2006/01")
+	default:
+		return ""
 	}
 }

@@ -72,3 +72,10 @@ func GetPairHttpData() {
 	}
 	fmt.Println(false)
 }
+
+func NilValue() {
+	var bs BoolStruct
+	var i interface{}
+	i = &bs
+	fmt.Println(i)
+}

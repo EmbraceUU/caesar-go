@@ -40,3 +40,8 @@ func TestUTCStringToTime(t *testing.T) {
 func TestCron(t *testing.T) {
 	Cron()
 }
+
+func TestAlias(t *testing.T) {
+	a := Alias("month", 1577870833)
+	println(a)
+}

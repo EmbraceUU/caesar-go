@@ -13,3 +13,7 @@ func TestGetBoolStruct(t *testing.T) {
 func TestGetPairHttpData(t *testing.T) {
 	GetPairHttpData()
 }
+
+func TestNilValue(t *testing.T) {
+	NilValue()
+}
