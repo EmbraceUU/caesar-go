@@ -1,14 +1,7 @@
 package goroutine
 
-import (
-	"fmt"
-	"testing"
-)
+import "testing"
 
-func TestAction(t *testing.T) {
-	for i := 0; i < 10; i++ {
-		go func() {
-			fmt.Println(i)
-		}()
-	}
+func TestExecute1(t *testing.T) {
+	Execute1()
 }
