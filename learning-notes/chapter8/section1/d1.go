@@ -1,15 +1,18 @@
-package goroutine
+package main
 
 import "time"
 
-// 检测goroutine的延时加载
-func Execute1() {
-	var c int
-	counter := func() int {
-		c++
-		return c
-	}
+var c int
 
+func counter() int {
+	c++
+	return c
+}
+
+/*
+goroutine 延时执行
+*/
+func main() {
 	a := 100
 
 	// 虽然不会立即执行函数, 但是参数会被立即执行并复制
