@@ -31,7 +31,7 @@ func getReceiver() *receiver {
 	return &r
 }
 
-func main() {
+func _main() {
 	r := getReceiver()
 
 	r.data <- 1
