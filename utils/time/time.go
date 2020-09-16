@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"math"
+	"strings"
 	"time"
 )
 
@@ -240,4 +241,10 @@ func Alias(timeType string, timestamp int64) string {
 	default:
 		return ""
 	}
+}
+
+func TransferTimestamp(dateTime string) int64 {
+	dateTime = strings.Replace(dateTime[:19], "T", " ", -1)
+	t, _ := time.Parse("2006-01-02 15:04:05", dateTime)
+	return t.Unix()
 }

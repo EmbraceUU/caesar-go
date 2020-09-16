@@ -45,3 +45,8 @@ func TestAlias(t *testing.T) {
 	a := Alias("month", 1577870833)
 	println(a)
 }
+
+func TestTransferTimestamp(t *testing.T) {
+	ts := TransferTimestamp("2020-08-20T03:01:21.636Z")
+	print(ts)
+}

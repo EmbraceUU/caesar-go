@@ -10,12 +10,8 @@ replace (
 )
 
 require (
-	github.com/google/go-cmp v0.4.0 // indirect
-	golang.org/x/net v0.0.0-20200301022130-244492dfa37a // indirect
-	golang.org/x/sys v0.0.0-20200317113312-5766fd39f98d // indirect
-	golang.org/x/text v0.3.2 // indirect
+	github.com/shopspring/decimal v1.2.0
 	golang.org/x/time v0.0.0-20191024005414-555d28b269f0
-	google.golang.org/genproto v0.0.0-20200317114155-1f3552e48f24 // indirect
 )
 
 go 1.12
