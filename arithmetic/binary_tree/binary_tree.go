@@ -1,6 +1,8 @@
 package binary_tree
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // 以根访问顺序决定是什么遍历
 // 左子树都是优先右子树
@@ -62,4 +64,37 @@ func inorderTraversal(root *TreeNode) {
 		// 转移到右子树, 再中序遍历
 		root = node.Right
 	}
+}
+
+// 后序遍历
+// 左子树 -> 右子树 -> 根节点
+func postorderTraversal(root *TreeNode) []int {
+	if root == nil {
+		return nil
+	}
+
+	result := make([]int, 0)
+	stack := make([]*TreeNode, 0)
+	var lastVisit *TreeNode
+
+	for root != nil || len(stack) > 0 {
+		// 先访问左子树
+		for root != nil {
+			stack = append(stack, root)
+			root = root.Left
+		}
+
+		node := stack[len(stack)-1]
+		// 增加一个lastVisit, 确保右子树已经弹出, 再弹出根节点
+		if node.Right == nil || node.Right == lastVisit {
+			stack = stack[:len(stack)-1]
+			result = append(result, node.Val)
+
+			lastVisit = node
+		} else {
+			root = node.Right
+		}
+	}
+
+	return result
 }
