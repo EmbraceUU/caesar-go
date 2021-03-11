@@ -450,3 +450,37 @@
 [面试2](https://mp.weixin.qq.com/s/pA2pYdoZU8ZIZoFm9txESw)
 
 [面试3](https://mp.weixin.qq.com/s/dPDou-DKCYqzTHTHX6A0Bw)
+
+[面试4](https://studygolang.com/articles/17796?fr=sidebar)
+
+[面试5](https://studygolang.com/articles/32847)
+
+[面试6](https://seekload.net/2021/02/28/interview-question.html)
+
+#### k8s 相关
+
+一个pod的创建过程
+
+kube-proxy有几种方式 之间有什么区别
+
+cni插件有几种实现方式 之间有什么区别
+
+service 的nodeport访问原理
+
+#### golang
+
+有几种类型的channel
+
+gpm模型
+
+有几种锁
+
+#### tcp
+
+tcp 状态机（三次握手 四次挥手）
+
+tcp udp 的区别
+
+http1.0 http2.0区别
+
+拥塞控制
