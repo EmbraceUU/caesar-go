@@ -98,3 +98,24 @@ func postorderTraversal(root *TreeNode) []int {
 
 	return result
 }
+
+// DFS 深度遍历 从下到上 分治法
+func preorderTraversal3(root *TreeNode) []int {
+	result := divideAndConquer(root)
+	return result
+}
+
+func divideAndConquer(root *TreeNode) []int {
+	var result []int
+	if root == nil {
+		return nil
+	}
+
+	left := divideAndConquer(root.Left)
+	right := divideAndConquer(root.Right)
+
+	result = append(result, root.Val)
+	result = append(result, left...)
+	result = append(result, right...)
+	return result
+}
