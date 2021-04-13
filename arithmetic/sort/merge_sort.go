@@ -1,6 +1,6 @@
 package sort
 
-// 【归并排序 分治法】
+// MergeSort 【归并排序 分治法】
 func MergeSort(nums []int) []int {
 	// 如果只有1个或者没有元素，直接返回，不需要再排序
 	if len(nums) <= 1 {
