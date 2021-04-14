@@ -7,21 +7,21 @@ import (
 // 以根访问顺序决定是什么遍历
 // 左子树都是优先右子树
 
-// 【前序遍历 递归】
-func preorderTraversal(root *TreeNode) {
+// PreorderTraversal 【前序遍历 递归】
+func PreorderTraversal(root *TreeNode) {
 	if root == nil {
 		return
 	}
 	// 访问当前根节点
 	fmt.Println(root.Val)
 	// 前序遍历左子树
-	preorderTraversal(root.Left)
+	PreorderTraversal(root.Left)
 	// 前序遍历右子树
-	preorderTraversal(root.Right)
+	PreorderTraversal(root.Right)
 }
 
-// 【前序遍历 非递归】
-func preorderTraversalII(root *TreeNode) {
+// PreorderTraversalII 【前序遍历 非递归】
+func PreorderTraversalII(root *TreeNode) {
 	if root == nil {
 		return
 	}
@@ -43,9 +43,9 @@ func preorderTraversalII(root *TreeNode) {
 	}
 }
 
-// 【中序遍历 非递归】
+// InorderTraversal 【中序遍历 非递归】
 // 左子树 -> 根节点 -> 右子树
-func inorderTraversal(root *TreeNode) {
+func InorderTraversal(root *TreeNode) {
 	if root == nil {
 		return
 	}
@@ -66,9 +66,9 @@ func inorderTraversal(root *TreeNode) {
 	}
 }
 
-// 【后序遍历 非递归】
+// PostorderTraversal 【后序遍历 非递归】
 // 左子树 -> 右子树 -> 根节点
-func postorderTraversal(root *TreeNode) []int {
+func PostorderTraversal(root *TreeNode) []int {
 	if root == nil {
 		return nil
 	}
@@ -99,11 +99,11 @@ func postorderTraversal(root *TreeNode) []int {
 	return result
 }
 
-// 【DFS 深度遍历 分治法】
+// PreorderTraversalIII 【DFS 深度遍历 分治法】
 // DFS中 关键点是【递归以及回溯】
 // 采用递归的方式, 先分别递归返回结果, 然后合并结果, 合并的时候, 可以控制访问的顺序
 // 可以简单的实现 preorder/inorder/postorder 这三种顺序
-func preorderTraversalIII(root *TreeNode) []int {
+func PreorderTraversalIII(root *TreeNode) []int {
 	result := divideAndConquer(root)
 	return result
 }
@@ -123,8 +123,8 @@ func divideAndConquer(root *TreeNode) []int {
 	return result
 }
 
-// 【BFS 广度优先搜索 第一版】
-func levelOrder(root *TreeNode) [][]int {
+// LevelOrder 【BFS 广度优先搜索 第一版】
+func LevelOrder(root *TreeNode) [][]int {
 	result := make([][]int, 0)
 	if root == nil {
 		return nil
@@ -152,10 +152,10 @@ func levelOrder(root *TreeNode) [][]int {
 	return result
 }
 
-// 【BFS 广度优先搜索 改进版】
+// LevelOrderII 【BFS 广度优先搜索 改进版】
 // 遍历当前层，并标记下一层, 然后再遍历下一层, 以此循环遍历
 // TODO 为什么改进版比第一版的内存消耗更大了 ？
-func levelOrderII(root *TreeNode) [][]int {
+func LevelOrderII(root *TreeNode) [][]int {
 	result := make([][]int, 0)
 	if root == nil {
 		return nil
@@ -186,4 +186,29 @@ func levelOrderII(root *TreeNode) [][]int {
 		result = append(result, list)
 	}
 	return result
+}
+
+// MaxDepth 求二叉树的最大深度
+func MaxDepth(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+
+	depth := 1
+	return maxDepthTraversal(root, depth)
+}
+
+func maxDepthTraversal(root *TreeNode, depth int) int {
+	if root == nil {
+		return depth
+	}
+
+	depth++
+	dl := maxDepthTraversal(root.Left, depth)
+	dr := maxDepthTraversal(root.Right, depth)
+	if dl > dr {
+		return dl
+	} else {
+		return dr
+	}
 }
