@@ -99,6 +99,8 @@ func PostorderTraversal(root *TreeNode) []int {
 	return result
 }
 
+// --------------------------- 分界线 --------------------------- //
+
 // PreorderTraversalIII 【DFS 深度遍历 分治法】
 // DFS中 关键点是【递归以及回溯】
 // 采用递归的方式, 先分别递归返回结果, 然后合并结果, 合并的时候, 可以控制访问的顺序
@@ -122,6 +124,8 @@ func divideAndConquer(root *TreeNode) []int {
 	result = append(result, right...)
 	return result
 }
+
+// --------------------------- 分界线 --------------------------- //
 
 // LevelOrder 【BFS 广度优先搜索 第一版】
 func LevelOrder(root *TreeNode) [][]int {
@@ -188,6 +192,8 @@ func LevelOrderII(root *TreeNode) [][]int {
 	return result
 }
 
+// --------------------------- 分界线 --------------------------- //
+
 // MaxDepth 求二叉树的最大深度
 func MaxDepth(root *TreeNode) int {
 	if root == nil {
@@ -203,6 +209,8 @@ func MaxDepth(root *TreeNode) int {
 		return dr + 1
 	}
 }
+
+// --------------------------- 分界线 --------------------------- //
 
 // IsBalanced 平衡二叉树
 // 分治法 + 递归
