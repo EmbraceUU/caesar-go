@@ -1,5 +1,9 @@
 # caesar-go
 
+## arithmetic
+
+算法部分, 日常学习算法的记录
+
 ## geek-learning
 
 这部分是学习极客时间的课, 做一些笔记。
