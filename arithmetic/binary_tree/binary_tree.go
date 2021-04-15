@@ -194,21 +194,51 @@ func MaxDepth(root *TreeNode) int {
 		return 0
 	}
 
-	depth := 1
-	return maxDepthTraversal(root, depth)
+	dl := MaxDepth(root.Left)
+	dr := MaxDepth(root.Right)
+
+	if dl > dr {
+		return dl + 1
+	} else {
+		return dr + 1
+	}
 }
 
-func maxDepthTraversal(root *TreeNode, depth int) int {
+// IsBalanced 平衡二叉树
+// 分治法 + 递归
+// 判断条件 左边平衡 && 右边平衡 && 两边高度差 <= 1
+// 技巧: 返回数据二义性, 用-1表示不平衡, 用>=0表示高度
+func IsBalanced(root *TreeNode) bool {
 	if root == nil {
-		return depth
+		return true
 	}
 
-	depth++
-	dl := maxDepthTraversal(root.Left, depth)
-	dr := maxDepthTraversal(root.Right, depth)
+	depth := isBalanced(root)
+	if depth < 0 {
+		return false
+	}
+	return true
+}
+
+func isBalanced(root *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+
+	dl := isBalanced(root.Left)
+	dr := isBalanced(root.Right)
+
+	if dl < 0 || dr < 0 {
+		return -1
+	}
+
+	if dl-dr > 1 || dl-dr < -1 {
+		return -1
+	}
+
 	if dl > dr {
-		return dl
+		return dl + 1
 	} else {
-		return dr
+		return dr + 1
 	}
 }
