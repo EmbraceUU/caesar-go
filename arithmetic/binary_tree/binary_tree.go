@@ -250,3 +250,30 @@ func isBalanced(root *TreeNode) int {
 		return dr + 1
 	}
 }
+
+func MaxPathSum(root *TreeNode) int {
+	var maxSum int
+	var dfs func(root *TreeNode) int
+	dfs = func(root *TreeNode) int {
+		if root == nil {
+			return 0
+		}
+
+		left := dfs(root.Left)
+		right := dfs(root.Right)
+
+		maxSum = max(maxSum, left+root.Val+right)
+
+		return max(0, root.Val+max(left, right))
+	}
+
+	dfs(root)
+	return maxSum
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
