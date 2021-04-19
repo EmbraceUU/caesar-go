@@ -277,3 +277,63 @@ func max(a, b int) int {
 	}
 	return b
 }
+
+// LowestCommonAncestor 我认为，就是找到一个共同的节点
+// 应该是从下往上找,
+// [3,5,1,6,2,0,8,null,null,7,4]
+//	5
+//	4
+func LowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+	pPath := make([]*TreeNode, 0)
+	qPath := make([]*TreeNode, 0)
+
+	var findPath func(root, p *TreeNode, path []*TreeNode) []*TreeNode
+
+	findPath = func(root, p *TreeNode, path []*TreeNode) []*TreeNode {
+		if root == nil {
+			return path
+		}
+		if p == nil {
+			return path
+		}
+
+		if root != p {
+			// 这里没有重新赋值
+			// 左子树和右子树 不会同时都有路径, 这个是关键
+			pathl := findPath(root.Left, p, path)
+			pathr := findPath(root.Right, p, path)
+
+			if len(pathl) > 0 {
+				path = pathl
+			} else if len(pathr) > 0 {
+				path = pathr
+			}
+
+			if len(path) > 0 {
+				path = append(path, root)
+			}
+		} else {
+			path = append(path, root)
+			return path
+		}
+
+		return path
+	}
+
+	pPath = findPath(root, p, pPath)
+	qPath = findPath(root, q, qPath)
+
+	fmt.Println(pPath)
+	fmt.Println(qPath)
+
+	pLen, qLen := len(pPath), len(qPath)
+
+	for i := 0; i < pLen; i++ {
+		for j := 0; j < qLen; j++ {
+			if pPath[i] == qPath[j] {
+				return pPath[i]
+			}
+		}
+	}
+	return root
+}
