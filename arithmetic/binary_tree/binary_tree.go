@@ -323,9 +323,6 @@ func LowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	pPath = findPath(root, p, pPath)
 	qPath = findPath(root, q, qPath)
 
-	fmt.Println(pPath)
-	fmt.Println(qPath)
-
 	pLen, qLen := len(pPath), len(qPath)
 
 	for i := 0; i < pLen; i++ {
@@ -336,4 +333,37 @@ func LowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 		}
 	}
 	return root
+}
+
+// LowestCommonAncestorII
+// 通过递归对二叉树进行后序遍历，当遇到节点 p 或 q 时返回。从底至顶回溯，
+// 当节点 p, q 在节点 root 的异侧时，节点 root 即为最近公共祖先，则向上返回 root。
+func LowestCommonAncestorII(root, p, q *TreeNode) *TreeNode {
+	// 如果root为nil，返回nil
+	if root == nil {
+		return nil
+	}
+	// 如果root为p， 那么root为p的最近的父节点; 对q亦然
+	if root == p || root == q {
+		return root
+	}
+	// 开启递归过程, 向左右子树寻找公共祖先
+	left := LowestCommonAncestorII(root.Left, p, q)
+	right := LowestCommonAncestorII(root.Right, p, q)
+
+	// 如果p和q分别在root的两侧，节点root即为最近公共祖先
+	if left != nil && right != nil {
+		return root
+	}
+
+	// 再往上找，肯定会出现left或者right为Nil的情况
+	if left != nil {
+		return left
+	}
+	if right != nil {
+		return right
+	}
+
+	// 如果left和right都为nil, 则返回nil， 说明root下面没有p或者q
+	return nil
 }
