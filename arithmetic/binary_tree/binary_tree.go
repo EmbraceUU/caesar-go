@@ -192,6 +192,21 @@ func LevelOrderII(root *TreeNode) [][]int {
 	return result
 }
 
+// LevelOrderBottom 自下而上BFS
+// 使用LeverOrder的方法，把结果反转即可
+func LevelOrderBottom(root *TreeNode) [][]int {
+	result := LevelOrder(root)
+	reverse(result)
+	return result
+}
+
+// 反转列表
+func reverse(result [][]int) {
+	for i, j := 0, len(result)-1; i < j; i, j = i+1, j-1 {
+		result[i], result[j] = result[j], result[i]
+	}
+}
+
 // --------------------------- 分界线 --------------------------- //
 
 // MaxDepth 求二叉树的最大深度
