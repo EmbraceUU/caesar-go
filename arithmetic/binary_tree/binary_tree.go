@@ -207,6 +207,49 @@ func reverse(result [][]int) {
 	}
 }
 
+// ZigzagLevelOrder 自上而下, Z字形遍历
+func ZigzagLevelOrder(root *TreeNode) [][]int {
+	result := make([][]int, 0)
+	if root == nil {
+		return result
+	}
+
+	queue := make([]*TreeNode, 0)
+	queue = append(queue, root)
+	var toggle bool
+
+	for len(queue) > 0 {
+		list := make([]int, 0)
+		queueTemp := make([]*TreeNode, 0)
+
+		for i := 0; i < len(queue); i++ {
+			list = append(list, queue[i].Val)
+			if queue[i].Left != nil {
+				queueTemp = append(queueTemp, queue[i].Left)
+			}
+			if queue[i].Right != nil {
+				queueTemp = append(queueTemp, queue[i].Right)
+			}
+		}
+
+		if toggle {
+			reverseII(list)
+		}
+
+		result = append(result, list)
+		queue = queueTemp
+		toggle = !toggle
+	}
+
+	return result
+}
+
+func reverseII(data []int) {
+	for i, j := 0, len(data)-1; i < j; i, j = i+1, j-1 {
+		data[i], data[j] = data[j], data[i]
+	}
+}
+
 // --------------------------- 分界线 --------------------------- //
 
 // MaxDepth 求二叉树的最大深度
