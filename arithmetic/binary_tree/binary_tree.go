@@ -425,3 +425,41 @@ func LowestCommonAncestorII(root, p, q *TreeNode) *TreeNode {
 	// 如果left和right都为nil, 则返回nil， 说明root下面没有p或者q
 	return nil
 }
+
+// IsValidBST 验证二叉搜索树
+// 思路: 左子树返回一个最大的数, 右子树返回一个最小的数, 然后和根节点比较
+func IsValidBST(root *TreeNode) bool {
+	_, _, isBST := maxAndMin(root)
+	return isBST
+}
+
+func maxAndMin(root *TreeNode) (int, int, bool) {
+	if root == nil {
+		return 0, 0, true
+	}
+
+	lmax, lmin, lb := maxAndMin(root.Left)
+	rmax, rmin, rb := maxAndMin(root.Right)
+
+	// 如果子树有不满足的, 直接返回false
+	if !lb || !rb {
+		return 0, 0, false
+	}
+
+	if rmin != 0 && rmin <= root.Val {
+		return 0, 0, false
+	}
+
+	if lmax != 0 && lmax >= root.Val {
+		return 0, 0, false
+	}
+
+	if rmax == 0 {
+		rmax = root.Val
+	}
+	if lmin == 0 {
+		lmin = root.Val
+	}
+
+	return rmax, lmin, true
+}
