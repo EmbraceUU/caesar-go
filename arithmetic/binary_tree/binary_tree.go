@@ -309,6 +309,9 @@ func isBalanced(root *TreeNode) int {
 	}
 }
 
+// MaxPathSum 二叉树中的最大路径和
+// 路径每到一个节点，有 3 种选择：1. 停在当前节点。2. 走到左子节点。3. 走到右子节点。
+// 使用dfs, 每次更新maxSum，然后每次返回该节点的最大路径，并且负数时返回0
 func MaxPathSum(root *TreeNode) int {
 	var maxSum int
 	var dfs func(root *TreeNode) int
@@ -462,4 +465,63 @@ func maxAndMin(root *TreeNode) (int, int, bool) {
 	}
 
 	return rmax, lmin, true
+}
+
+// IsValidBSTII 验证二叉搜索树
+// 使用中序遍历二叉树，然后判断排序是否正确
+func IsValidBSTII(root *TreeNode) bool {
+	result := make([]int, 0)
+	inOrder(root, &result)
+
+	l := len(result)
+	for i := 0; i < l; i++ {
+		if i < l-1 {
+			if result[i] > result[i+1] {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+func inOrder(root *TreeNode, result *[]int) {
+	if root == nil {
+		return
+	}
+
+	inOrder(root.Left, result)
+	*result = append(*result, root.Val)
+	inOrder(root.Right, result)
+}
+
+// InsertIntoBST 插入二叉搜索树
+// 将新插入的节点插入到叶子节点即可
+func InsertIntoBST(root *TreeNode, val int) *TreeNode {
+	if root == nil {
+		return &TreeNode{
+			Val: val,
+		}
+	}
+
+	node := root
+	for node != nil {
+		if node.Val > val {
+			if node.Left == nil {
+				node.Left = &TreeNode{
+					Val: val,
+				}
+				break
+			}
+			node = node.Left
+		} else {
+			if node.Right == nil {
+				node.Right = &TreeNode{
+					Val: val,
+				}
+				break
+			}
+			node = node.Right
+		}
+	}
+	return root
 }
