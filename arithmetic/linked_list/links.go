@@ -1,4 +1,4 @@
-package links
+package linked_list
 
 // DeleteDuplicates 给定一个按升序排序的链表
 // 删除链表中重复的元素
@@ -32,4 +32,28 @@ func DeleteDuplicatesLatest(head *ListNode) *ListNode {
 		current = current.Next
 	}
 	return head
+}
+
+// DeleteDuplicatesII 给定一个按升序排序的链表，删除重复节点
+// 1. 借助于dummy node来处理head
+// 2. 借助于rmVal来删除所有重复节点
+func DeleteDuplicatesII(head *ListNode) *ListNode {
+	// 使用dummy node来处理head
+	dummy := &ListNode{Val: 0}
+	dummy.Next = head
+	current := dummy
+	// 链表里出现重复节点，最少有两个节点
+	var rmVal int
+	for current.Next != nil && current.Next.Next != nil {
+		// 使用rmVal辅助变量来删除所有重复节点
+		if current.Next.Val == current.Next.Next.Val {
+			rmVal = current.Next.Val
+			for current.Next != nil && current.Next.Val == rmVal {
+				current.Next = current.Next.Next
+			}
+			continue
+		}
+		current = current.Next
+	}
+	return dummy.Next
 }
