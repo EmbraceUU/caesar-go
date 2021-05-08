@@ -29,3 +29,16 @@ func TestDeleteDuplicatesII(t *testing.T) {
 
 	fmt.Println(head)
 }
+
+func TestReverseList(t *testing.T) {
+	numsArr := [...]int{1, 2, 3, 4, 5}
+	nums := make([]int, 0)
+	for _, v := range numsArr {
+		nums = append(nums, v)
+	}
+
+	head := NewListNode(nums)
+
+	head = ReverseList(head)
+	fmt.Println(head)
+}
