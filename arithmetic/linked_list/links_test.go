@@ -42,3 +42,17 @@ func TestReverseList(t *testing.T) {
 	head = ReverseList(head)
 	fmt.Println(head)
 }
+
+func TestReverseBetween(t *testing.T) {
+	numsArr := [...]int{1, 2, 3, 4, 5}
+	nums := make([]int, 0)
+	for _, v := range numsArr {
+		nums = append(nums, v)
+	}
+
+	head := NewListNode(nums)
+
+	head = ReverseBetween(head, 2, 4)
+
+	fmt.Println(head)
+}

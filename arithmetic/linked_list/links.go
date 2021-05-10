@@ -93,3 +93,99 @@ func ReverseListLatest(head *ListNode) *ListNode {
 	head.Next = nil
 	return newHead
 }
+
+// ReverseBetween 反转链表
+// 反转left到right之间的节点， 包括left和right
+// 错误：
+// 1. 没有利用dummy node来统一处理head变化的情况
+// 2. 思路不清晰，先遍历到left， 然后反转left到right，最后拼接left之前和right之后的节点
+// https://leetcode-cn.com/problems/reverse-linked-list-ii/
+func ReverseBetween(head *ListNode, left int, right int) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+	depth := 1
+	before := &ListNode{}
+	after := &ListNode{}
+	pre := head
+	current := head.Next
+	for current != nil && depth <= right {
+		// 想到了遍历到left的步骤，但是应该提到循环外面去，并且需要借助dummy node，这样才能统一处理
+		if depth < left {
+			pre = current
+			current = current.Next
+			depth++
+			continue
+		}
+
+		// 赋值before和after的部分思路不清晰
+		// 在进入循环之前以及循环退出时处理即可
+		if depth == left-1 {
+			before = current
+		} else if depth == right {
+			after = current.Next
+		}
+
+		// 逻辑太耦合，需要兼顾before和after的情况
+		// 对于before和after借助指针在外面处理即可
+		if depth >= left {
+			tmp := current.Next
+			if depth == left {
+				current.Next = after
+			} else {
+				current.Next = pre
+			}
+			if depth == right {
+				before.Next = current
+			} else {
+				pre = current
+			}
+			current = tmp
+		}
+
+		depth++
+	}
+
+	return head
+}
+
+// ReverseBetweenLatest 反转链表
+// 先遍历到 left 处，翻转，再拼接后续
+func ReverseBetweenLatest(head *ListNode, left int, right int) *ListNode {
+	if head == nil {
+		return head
+	}
+
+	// 0->1->2->3->4->5->Nil
+	dummy := &ListNode{}
+	dummy.Next = head
+	head = dummy
+
+	// 0->1(pre)->2(head)->3->4->5->Nil
+	var pre *ListNode
+	var i int
+	for i < left {
+		pre = head
+		head = head.Next
+		i++
+	}
+
+	j := i
+	mid := head
+	var next *ListNode
+	for head != nil && j <= right {
+		// 0->1 nil<-2(next) 3(head)->4->5->Nil j=2
+		// 0->1 nil<-2<-3(next) 4(head)->5->Nil j=3
+		// 0->1 nil<-2<-3<-4(next) 5(head)->Nil j=4
+		tmp := head.Next
+		head.Next = next
+		next = head
+		head = tmp
+		j++
+	}
+
+	pre.Next = next
+	mid.Next = head
+
+	return dummy.Next
+}
