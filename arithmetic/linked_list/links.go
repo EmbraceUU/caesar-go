@@ -189,3 +189,33 @@ func ReverseBetweenLatest(head *ListNode, left int, right int) *ListNode {
 
 	return dummy.Next
 }
+
+// MergeTwoLists 将两个升序链表合并为一个新的 升序 链表并返回。
+// 新链表是通过拼接给定的两个链表的所有节点组成的。
+// 借助dummy node
+// https://leetcode-cn.com/problems/merge-two-sorted-lists/
+func MergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
+	dummy := &ListNode{}
+	head := dummy
+	// 同时遍历两个链表，从小到大拼接，直到有一个链表为nil
+	for l1 != nil && l2 != nil {
+		if l1.Val <= l2.Val {
+			head.Next = l1
+			l1 = l1.Next
+		} else {
+			head.Next = l2
+			l2 = l2.Next
+		}
+		head = head.Next
+	}
+
+	// 将另外一个不为nil的链表拼接在后面
+	if l1 != nil {
+		head.Next = l1
+	}
+	if l2 != nil {
+		head.Next = l2
+	}
+
+	return dummy.Next
+}

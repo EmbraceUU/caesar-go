@@ -56,3 +56,25 @@ func TestReverseBetween(t *testing.T) {
 
 	fmt.Println(head)
 }
+
+func TestMergeTwoLists(t *testing.T) {
+	numsArr := [...]int{}
+	nums := make([]int, 0)
+	for _, v := range numsArr {
+		nums = append(nums, v)
+	}
+
+	l1 := NewListNode(nums)
+
+	numsArr2 := [...]int{}
+	nums = make([]int, 0)
+	for _, v := range numsArr2 {
+		nums = append(nums, v)
+	}
+
+	l2 := NewListNode(nums)
+
+	head := MergeTwoLists(l1, l2)
+
+	fmt.Println(head)
+}
