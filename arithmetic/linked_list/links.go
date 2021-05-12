@@ -219,3 +219,42 @@ func MergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
 
 	return dummy.Next
 }
+
+// Partition 给你一个链表的头节点 head 和一个特定值 x ，请你对链表进行分隔，使得所有 小于 x 的节点都出现在 大于或等于 x 的节点之前。
+// 你应当 保留 两个分区中每个节点的初始相对位置。
+// 将大于等于x的节点放到另外一个链表上，然后连接两个节点
+// 错误：没有处理好新链表的新增过程
+// 错误：没有设置新链表最后一个节点为Nil, 导致了循环
+// https://leetcode-cn.com/problems/partition-list/
+func Partition(head *ListNode, x int) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	var headr *ListNode
+	dummyl := &ListNode{Next: head}
+	dummyr := &ListNode{}
+	head = dummyl
+	headr = dummyr
+
+	// 0(head)->1->4->3->2->5->2   0(headr)->Nil
+	// 0->1(head)->4->3->2->5->2   0(headr)->Nil
+	// 0->1->3(head)->2->5->2   0->4(headr)->Nil
+	// 0->1->2(head)->5->2   0->4->3(headr)->Nil
+	// 0->1->2->2(head)   0->4->3->5(headr)->Nil
+	for head.Next != nil {
+		if head.Next.Val >= x {
+			headr.Next = head.Next
+			headr = headr.Next // 4->3
+
+			head.Next = head.Next.Next // 1->3
+		} else {
+			head = head.Next
+		}
+	}
+
+	head.Next = dummyr.Next
+	headr.Next = nil
+
+	return dummyl.Next
+}

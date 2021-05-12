@@ -78,3 +78,17 @@ func TestMergeTwoLists(t *testing.T) {
 
 	fmt.Println(head)
 }
+
+func TestPartition(t *testing.T) {
+	numsArr := [...]int{1, 4, 3, 2, 5, 2}
+	nums := make([]int, 0)
+	for _, v := range numsArr {
+		nums = append(nums, v)
+	}
+
+	head := NewListNode(nums)
+
+	head = Partition(head, 3)
+
+	fmt.Println(head)
+}
