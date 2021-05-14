@@ -92,3 +92,17 @@ func TestPartition(t *testing.T) {
 
 	fmt.Println(head)
 }
+
+func TestSortList(t *testing.T) {
+	numsArr := [...]int{-1, 5, 3, 4, 0}
+	nums := make([]int, 0)
+	for _, v := range numsArr {
+		nums = append(nums, v)
+	}
+
+	head := NewListNode(nums)
+
+	head = SortList(head)
+
+	fmt.Println(head)
+}

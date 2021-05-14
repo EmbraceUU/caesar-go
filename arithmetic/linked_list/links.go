@@ -258,3 +258,70 @@ func Partition(head *ListNode, x int) *ListNode {
 
 	return dummyl.Next
 }
+
+// SortList 给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。
+// 在 O(n log n) 时间复杂度和常数级空间复杂度下处理
+// 思路：归并排序，将链表拆分，分到不能再分为止，然后合并
+// https://leetcode-cn.com/problems/sort-list/
+func SortList(head *ListNode) *ListNode {
+	// -1->5->3->4->0
+	// -1->5  3->4->0
+	// -1->5  3  4->0
+	// -1->5  3  0->4
+	// -1->5  0->3->4
+	// -1->0->3->4->5
+
+	// 使用快慢指针找链表中点
+	findMid := func(head *ListNode) *ListNode {
+		// todo 之前用的head做fast，导致两个节点时陷入死循环
+		fast := head.Next
+		slow := head
+		for fast != nil && fast.Next != nil {
+			fast = fast.Next.Next
+			slow = slow.Next
+		}
+		return slow
+	}
+
+	// todo 因为没有处理mid与head的切分，导致head在mergeSort里陷入死循环
+	var mergeSort func(node *ListNode) *ListNode
+	mergeSort = func(head *ListNode) *ListNode {
+		// 当只有一个节点时， 退出递归
+		if head == nil || head.Next == nil {
+			return head
+		}
+
+		mid := findMid(head)
+
+		tail := mid.Next
+		mid.Next = nil
+		// 递归，得到排好序并且合并了的链表
+		sortedHead := mergeSort(head)
+		sortedMid := mergeSort(tail)
+
+		// 合并链表
+		dummy := &ListNode{}
+		current := dummy
+		for sortedHead != nil && sortedMid != nil {
+			if sortedHead.Val <= sortedMid.Val {
+				current.Next = sortedHead
+				current = current.Next
+				sortedHead = sortedHead.Next
+			} else {
+				current.Next = sortedMid
+				current = current.Next
+				sortedMid = sortedMid.Next
+			}
+		}
+
+		if sortedHead != nil {
+			current.Next = sortedHead
+		}
+		if sortedMid != nil {
+			current.Next = sortedMid
+		}
+
+		return dummy.Next
+	}
+	return mergeSort(head)
+}
