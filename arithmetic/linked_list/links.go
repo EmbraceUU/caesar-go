@@ -325,3 +325,51 @@ func SortList(head *ListNode) *ListNode {
 	}
 	return mergeSort(head)
 }
+
+// ReorderList 给定一个单链表 L：L0→L1→…→Ln-1→Ln ，将其重新排列后变为： L0→Ln→L1→Ln-1→L2→Ln-2→…
+// 思路：
+// 1. 找到中点，将链表切成两段
+// 2. 将后半段反转
+// 3. 合并两个链表
+func ReorderList(head *ListNode) {
+	if head == nil || head.Next == nil {
+		return
+	}
+
+	fast := head.Next
+	slow := head
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+	}
+
+	// 1->2->3->4->5
+	// 1->2->3(slow)->4->5->nil(fast)
+
+	// 1->2->3 4(mid)->5->nil(fast)
+	mid := slow.Next
+	slow.Next = nil
+
+	// nil(next)  4(cur)->5->nil
+	// nil<-4(next) 5(cur)->nil
+	// nil<-4<-5(next) nil(cur)
+	current := mid
+	var next *ListNode
+	for current != nil {
+		tmp := current.Next
+		current.Next = next
+		next = current
+		current = tmp
+	}
+
+	// 1->5->2(cur)->4(next)->3
+	current = head
+	for next != nil {
+		tmp := current.Next // nil
+		tmp2 := next.Next   // nil
+		current.Next = next
+		next.Next = tmp
+		next = tmp2
+		current = tmp
+	}
+}

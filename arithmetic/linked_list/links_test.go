@@ -106,3 +106,17 @@ func TestSortList(t *testing.T) {
 
 	fmt.Println(head)
 }
+
+func TestReorderList(t *testing.T) {
+	numsArr := [...]int{1, 2, 3}
+	nums := make([]int, 0)
+	for _, v := range numsArr {
+		nums = append(nums, v)
+	}
+
+	head := NewListNode(nums)
+
+	ReorderList(head)
+
+	fmt.Println(head)
+}
