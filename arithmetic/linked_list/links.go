@@ -373,3 +373,22 @@ func ReorderList(head *ListNode) {
 		current = tmp
 	}
 }
+
+// HasCycle 给定一个链表，判断链表中是否有环。
+// 如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。
+// https://leetcode-cn.com/problems/linked-list-cycle/
+func HasCycle(head *ListNode) bool {
+	if head == nil || head.Next == nil {
+		return false
+	}
+	fast := head.Next
+	slow := head
+	for fast != nil && fast.Next != nil {
+		if fast == slow {
+			return true
+		}
+		fast = fast.Next.Next
+		slow = slow.Next
+	}
+	return false
+}
