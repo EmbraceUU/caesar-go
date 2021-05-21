@@ -392,3 +392,24 @@ func HasCycle(head *ListNode) bool {
 	}
 	return false
 }
+
+// DetectCycle 给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。
+// 错误：忽略了值相同的情况
+// https://leetcode-cn.com/problems/linked-list-cycle-ii/
+func DetectCycle(head *ListNode) *ListNode {
+	// [-1,-7,7,-4,19,6,-9(cy),-5,-2,-5]
+	// 6
+	if head == nil || head.Next == nil {
+		return nil
+	}
+	nodeMap := make(map[*ListNode]struct{})
+	for head != nil {
+		_, ok := nodeMap[head]
+		if ok {
+			return head
+		}
+		nodeMap[head] = struct{}{}
+		head = head.Next
+	}
+	return nil
+}
