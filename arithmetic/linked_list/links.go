@@ -413,3 +413,30 @@ func DetectCycle(head *ListNode) *ListNode {
 	}
 	return nil
 }
+
+// DetectCycleLatest
+// 思路:
+// 假设 a 为起点到环入口的距离，b 为入口到相遇点的距离，c 为相遇点到入口的距离
+// fast 走过的距离为：a + n(b + c) + b
+// slow 走过的距离为: a + b
+// 得到等式 a + n(b + c) + b = 2(a + b) => a = c+(n−1)(b+c)
+// 所以，相遇后，新创建一个指针 p 从 head 向入口走，slow 从相遇点向后走，会在入口处相遇。
+func DetectCycleLatest(head *ListNode) *ListNode {
+	// 先用快慢指针，算出相遇点
+	// 再创建新指针 p , 算出 p 和 slow 的相遇点
+	fast, slow := head, head
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+		// TODO 如果判断在跳动前面，会出现错误的结果
+		if fast == slow {
+			p := head
+			for p != slow {
+				p = p.Next
+				slow = slow.Next
+			}
+			return p
+		}
+	}
+	return nil
+}
