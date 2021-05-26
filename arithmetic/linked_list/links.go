@@ -440,3 +440,50 @@ func DetectCycleLatest(head *ListNode) *ListNode {
 	}
 	return nil
 }
+
+// IsPalindrome 请判断一个链表是否为回文链表。
+// 1->2->2->1
+// 思路:
+// 1. 用快慢指针找到中点
+// 2. 反转后半段链表
+// 3. 对比两段链表是否一致
+// 错误点： 没有正确理解题意，1->0->1 也是回文链表，所以不需要判断最后 head 和 next 是否同时为 nil
+// https://leetcode-cn.com/problems/palindrome-linked-list/
+func IsPalindrome(head *ListNode) bool {
+	if head == nil || head.Next == nil {
+		return true
+	}
+	// 1->2->3->4->4->3->2->1
+	fast := head.Next
+	slow := head
+	for fast != nil && fast.Next != nil {
+		fast = fast.Next.Next
+		slow = slow.Next
+	}
+	// 1->2->3->4(slow)->4->3->2->1(fast)->nil
+
+	mid := slow.Next
+	slow.Next = nil
+
+	// 1->2->3->4(slow)->4->3->2->1->nil
+	// 1->2->3->4 nil<-4(next) 3(mid)->2->1->nil
+	// 1->2->3->4 nil<-4<-3(next) 2(mid)->1->nil
+	// 1->2->3->4 nil<-4<-3<-2<-1(next) nil(mid)
+	var next *ListNode
+	for mid != nil {
+		tmp := mid.Next // 3 2
+		mid.Next = next // nil
+		next = mid
+		mid = tmp
+	}
+
+	for next != nil && head != nil {
+		if next.Val != head.Val {
+			return false
+		}
+		head = head.Next
+		next = next.Next
+	}
+
+	return true
+}

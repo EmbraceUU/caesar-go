@@ -120,3 +120,17 @@ func TestReorderList(t *testing.T) {
 
 	fmt.Println(head)
 }
+
+func TestIsPalindrome(t *testing.T) {
+	numsArr := [...]int{1, 0, 1}
+	nums := make([]int, 0)
+	for _, v := range numsArr {
+		nums = append(nums, v)
+	}
+
+	head := NewListNode(nums)
+
+	is := IsPalindrome(head)
+
+	fmt.Println(is)
+}
