@@ -487,3 +487,84 @@ func IsPalindrome(head *ListNode) bool {
 
 	return true
 }
+
+// CopyRandomList 复制链表中的指针都不应指向原链表中的节点 。
+// 我的思路：
+// 如果只有 Next 的拷贝，可以直接创建一个新的 node， 遍历 head 并创建新链表即可
+// 如果加上 random，则需要一个映射, 来维护两个链表的每个对应节点之间的关系
+// 处理 random 需要在遍历完旧链表之后
+// https://leetcode-cn.com/problems/copy-list-with-random-pointer/
+func CopyRandomList(head *Node) *Node {
+	// key 是就链表中的节点, value 是新链表中的节点
+	nodeMap := make(map[*Node]*Node)
+
+	if head == nil {
+		return nil
+	}
+
+	cpyHead := &Node{
+		Val: head.Val,
+	}
+	nodeMap[head] = cpyHead
+
+	cpyCur := cpyHead
+
+	current := head
+	for current.Next != nil {
+		tmp := &Node{
+			Val: current.Next.Val,
+		}
+		cpyCur.Next = tmp
+		nodeMap[current.Next] = tmp
+
+		current = current.Next
+		cpyCur = cpyCur.Next
+	}
+
+	p := cpyHead
+	for head != nil {
+		cpyNode := nodeMap[head.Random]
+		p.Random = cpyNode
+
+		p = p.Next
+		head = head.Next
+	}
+
+	return cpyHead
+}
+
+// CopyRandomListLatest 这种做法要比上面的做法内存消耗少, 没有用到 map 映射
+// TODO
+func CopyRandomListLatest(head *Node) *Node {
+	if head == nil {
+		return head
+	}
+	// 复制节点，紧挨到到后面
+	// 1->2->3  ==>  1->1'->2->2'->3->3'
+	cur := head
+	for cur != nil {
+		clone := &Node{Val: cur.Val, Next: cur.Next}
+		temp := cur.Next
+		cur.Next = clone
+		cur = temp
+	}
+	// 处理random指针
+	cur = head
+	for cur != nil {
+		if cur.Random != nil {
+			cur.Next.Random = cur.Random.Next
+		}
+		cur = cur.Next.Next
+	}
+	// 分离两个链表
+	cur = head
+	cloneHead := cur.Next
+	for cur != nil && cur.Next != nil {
+		temp := cur.Next
+		cur.Next = cur.Next.Next
+		cur = temp
+	}
+	// 原始链表头：head 1->2->3
+	// 克隆的链表头：cloneHead 1'->2'->3'
+	return cloneHead
+}

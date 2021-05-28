@@ -23,3 +23,9 @@ func NewListNode(nums []int) *ListNode {
 	}
 	return &head
 }
+
+type Node struct {
+	Val    int
+	Next   *Node
+	Random *Node
+}
