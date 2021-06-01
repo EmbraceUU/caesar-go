@@ -1,7 +1,18 @@
 package stack_queue
 
+import "strconv"
+
 // 栈的特点是 FILO 后进先出
 // 常用于临时保存一些数据，DFS 遍历
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * obj := Constructor();
+ * obj.Push(val);
+ * obj.Pop();
+ * param_3 := obj.Top();
+ * param_4 := obj.GetMin();
+ */
 
 // MinStack 设计一个支持 push ，pop ，top 操作，并能在常数时间内检索到最小元素的栈。
 // push(x) —— 将元素 x 推入栈中。
@@ -51,11 +62,42 @@ func (this *MinStack) GetMin() int {
 	return this.min[len(this.min)-1]
 }
 
-/**
- * Your MinStack object will be instantiated and called as such:
- * obj := Constructor();
- * obj.Push(val);
- * obj.Pop();
- * param_3 := obj.Top();
- * param_4 := obj.GetMin();
- */
+// ********************************** //
+
+// EvalRPN 逆波兰表达式求值
+// 思路: ["4","13","5","/","+"] -> (4 + (13 / 5))
+// 1. 利用 stack, 将数组压栈, 遇到运算符时, 出栈计算, 然后再压栈
+// https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/
+func EvalRPN(tokens []string) int {
+	if tokens == nil || len(tokens) == 0 {
+		return 0
+	}
+
+	stack := make([]int, 0)
+	for i := 0; i < len(tokens); i++ {
+		v := tokens[i]
+		// 如果是数值, 转换后压栈
+		if v != "+" && v != "-" && v != "*" && v != "/" {
+			num, _ := strconv.Atoi(v)
+			stack = append(stack, num)
+			continue
+		}
+
+		num1 := stack[len(stack)-1]
+		num2 := stack[len(stack)-2]
+		stack = stack[:len(stack)-2]
+
+		switch v {
+		case "+":
+			stack = append(stack, num2+num1)
+		case "-":
+			stack = append(stack, num2-num1)
+		case "*":
+			stack = append(stack, num2*num1)
+		case "/":
+			stack = append(stack, num2/num1)
+		}
+	}
+
+	return stack[0]
+}
