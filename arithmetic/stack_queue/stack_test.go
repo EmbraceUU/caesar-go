@@ -1,6 +1,9 @@
 package stack_queue
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 func TestConstructor(t *testing.T) {
 	s := Constructor()
@@ -11,4 +14,10 @@ func TestConstructor(t *testing.T) {
 	s.Pop()
 	s.Top()
 	s.GetMin()
+}
+
+func TestDecodeString(t *testing.T) {
+	s := "xxx300[a]2[bc]"
+	r := DecodeString(s)
+	fmt.Println(r)
 }

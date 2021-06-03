@@ -101,3 +101,71 @@ func EvalRPN(tokens []string) int {
 
 	return stack[0]
 }
+
+// DecodeString 给定一个经过编码的字符串，返回它解码后的字符串。
+// s = "3[a2[c]]"  -> "accaccacc"
+// 思路: 利用栈的特性, 遍历字符, 以此压栈, 当遇到 ], 以此出栈遇到第一个 [, 然后中间的字符为需要循环的内容, 再出栈的是循环的次数
+// https://leetcode-cn.com/problems/decode-string/
+func DecodeString(s string) string {
+	if len(s) == 0 {
+		return ""
+	}
+
+	stack := make([]string, 0)
+	for i := 0; i < len(s); i++ {
+		if s[i] == ']' {
+			// 遍历得到需要循环的内容
+			var cycle string
+			j := 0
+			for len(stack) > 0 {
+				j++
+				c := stack[len(stack)-j]
+				if c != "[" {
+					cycle = c + cycle
+				} else {
+					break
+				}
+			}
+
+			var numStr string
+			for len(stack) > j {
+				j++
+				// 再出栈一次, 拿到要循环的次数
+				n := stack[len(stack)-j]
+				_, err := strconv.Atoi(n)
+				if err != nil {
+					j--
+					break
+				} else {
+					numStr = n + numStr
+				}
+			}
+
+			// 完成字符的出栈操作
+			stack = stack[:len(stack)-j]
+
+			num, _ := strconv.Atoi(numStr)
+			// 错误: 循环时需将要循环的内容提前赋给临时变量, 要不然会直接翻倍
+			if num > 1 {
+				item := cycle
+				for k := 1; k < num; k++ {
+					cycle = cycle + item
+				}
+			}
+
+			// 再把 cycle 压栈
+			for k := 0; k < len(cycle); k++ {
+				stack = append(stack, string(cycle[k]))
+			}
+
+			continue
+		}
+		stack = append(stack, string(s[i]))
+	}
+
+	result := ""
+	for i := 0; i < len(stack); i++ {
+		result = result + stack[i]
+	}
+	return result
+}
