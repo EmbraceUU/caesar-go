@@ -105,67 +105,78 @@ func EvalRPN(tokens []string) int {
 // DecodeString 给定一个经过编码的字符串，返回它解码后的字符串。
 // s = "3[a2[c]]"  -> "accaccacc"
 // 思路: 利用栈的特性, 遍历字符, 以此压栈, 当遇到 ], 以此出栈遇到第一个 [, 然后中间的字符为需要循环的内容, 再出栈的是循环的次数
+// TODO 需要优化, 内存使用太高
 // https://leetcode-cn.com/problems/decode-string/
 func DecodeString(s string) string {
-	if len(s) == 0 {
-		return ""
-	}
-
-	stack := make([]string, 0)
+	stack := make([]byte, 0)
 	for i := 0; i < len(s); i++ {
 		if s[i] == ']' {
 			// 遍历得到需要循环的内容
-			var cycle string
+			temp := make([]byte, 0)
 			j := 0
 			for len(stack) > 0 {
 				j++
 				c := stack[len(stack)-j]
-				if c != "[" {
-					cycle = c + cycle
+				if c != '[' {
+					temp = append(temp, c)
 				} else {
 					break
-				}
-			}
-
-			var numStr string
-			for len(stack) > j {
-				j++
-				// 再出栈一次, 拿到要循环的次数
-				n := stack[len(stack)-j]
-				_, err := strconv.Atoi(n)
-				if err != nil {
-					j--
-					break
-				} else {
-					numStr = n + numStr
 				}
 			}
 
 			// 完成字符的出栈操作
+			// TODO j在上面多加了一次1, 所以在这里不需要再单独将 [ 出栈
 			stack = stack[:len(stack)-j]
 
-			num, _ := strconv.Atoi(numStr)
-			// 错误: 循环时需将要循环的内容提前赋给临时变量, 要不然会直接翻倍
-			if num > 1 {
-				item := cycle
-				for k := 1; k < num; k++ {
-					cycle = cycle + item
+			idx := 1
+			for len(stack) >= idx && stack[len(stack)-idx] >= '0' && stack[len(stack)-idx] <= '9' {
+				idx++
+			}
+
+			num, _ := strconv.Atoi(string(stack[len(stack)-idx+1:]))
+			stack = stack[:len(stack)-idx+1]
+
+			// TODO []byte可以直接转换为string
+			// TODO byte可以直接和字符比较
+			// TODO 循环时需将要循环的内容提前赋给临时变量, 要不然会直接翻倍
+			// 再把 cycle 压栈
+			for k := 0; k < num; k++ {
+				for m := len(temp) - 1; m >= 0; m-- {
+					stack = append(stack, temp[m])
 				}
 			}
-
-			// 再把 cycle 压栈
-			for k := 0; k < len(cycle); k++ {
-				stack = append(stack, string(cycle[k]))
-			}
-
 			continue
 		}
-		stack = append(stack, string(s[i]))
+		stack = append(stack, s[i])
 	}
 
-	result := ""
-	for i := 0; i < len(stack); i++ {
-		result = result + stack[i]
+	return string(stack)
+}
+
+// InorderTraversal 二叉树的中序遍历, 利用 stack
+// https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
+func InorderTraversal(root *TreeNode) []int {
+	if root == nil {
+		return nil
+	}
+
+	result := make([]int, 0)
+	stack := make([]*TreeNode, 0)
+	for root != nil || len(stack) != 0 {
+		// root 不为空的时候 压栈
+		for root != nil {
+			stack = append(stack, root)
+			// 跳转到左子树
+			root = root.Left
+		}
+
+		// 通过 node 访问值, 而通过 root 往 stack 里面压 node
+		node := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		result = append(result, node.Val)
+
+		// 跳转到右子树
+		root = node.Right
 	}
 	return result
 }

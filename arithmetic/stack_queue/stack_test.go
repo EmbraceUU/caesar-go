@@ -17,7 +17,7 @@ func TestConstructor(t *testing.T) {
 }
 
 func TestDecodeString(t *testing.T) {
-	s := "xxx300[a]2[bc]"
+	s := "3[a]2[bc]"
 	r := DecodeString(s)
 	fmt.Println(r)
 }
