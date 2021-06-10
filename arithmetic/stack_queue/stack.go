@@ -180,3 +180,35 @@ func InorderTraversal(root *TreeNode) []int {
 	}
 	return result
 }
+
+// CloneGraph 给你无向 连通 图中一个节点的引用，请你返回该图的 深拷贝（克隆）
+//	输入：adjList = [[2,4],[1,3],[2,4],[1,3]]
+//	输出：[[2,4],[1,3],[2,4],[1,3]]
+// https://leetcode-cn.com/problems/clone-graph/
+func CloneGraph(node *Node) *Node {
+	cloneGraphVisited = make(map[*Node]*Node)
+	return clone(node)
+}
+
+var cloneGraphVisited map[*Node]*Node
+
+// 思路：使用递归的方法，并借用 map 来存放 clone 节点和 node 的映射关系
+// 优化：将 map 提到外面作为全局变量, 减少了递归过程中传递参数带来的复制消耗
+func clone(node *Node) *Node {
+	if node == nil {
+		return node
+	}
+	if c, ok := cloneGraphVisited[node]; ok {
+		return c
+	}
+
+	cloneNode := &Node{
+		Val:       node.Val,
+		Neighbors: make([]*Node, 0),
+	}
+	cloneGraphVisited[node] = cloneNode
+	for _, n := range node.Neighbors {
+		cloneNode.Neighbors = append(cloneNode.Neighbors, clone(n))
+	}
+	return cloneNode
+}
