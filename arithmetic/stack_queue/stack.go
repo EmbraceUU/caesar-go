@@ -212,3 +212,35 @@ func clone(node *Node) *Node {
 	}
 	return cloneNode
 }
+
+// NumIslands 求岛屿数量
+// 思路: 使用DFS遍历岛屿，并将已经访问过的元素标记
+// 当访问节点是岛屿时，深度遍历所有相邻节点，并标记，然后岛屿数量+1
+// https://leetcode-cn.com/problems/number-of-islands/
+func NumIslands(grid [][]byte) int {
+	var dfs func(int, int)
+	nr, nc := len(grid), len(grid[0])
+
+	dfs = func(r, c int) {
+		if r < 0 || r >= nr || c < 0 || c >= nc || grid[r][c] == '0' {
+			return
+		}
+
+		grid[r][c] = '0'
+		dfs(r+1, c)
+		dfs(r, c+1)
+		dfs(r-1, c)
+		dfs(r, c-1)
+	}
+
+	var count int
+	for r := 0; r < nr; r++ {
+		for c := 0; c < nc; c++ {
+			if grid[r][c] == '1' {
+				count++
+				dfs(r, c)
+			}
+		}
+	}
+	return count
+}
