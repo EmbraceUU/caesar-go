@@ -244,3 +244,42 @@ func NumIslands(grid [][]byte) int {
 	}
 	return count
 }
+
+// LargestRectangleArea 给定 n 个非负整数，用来表示柱状图中各个柱子的高度。
+// 每个柱子彼此相邻，且宽度为 1 。 求在该柱状图中，能够勾勒出来的矩形的最大面积。
+// https://leetcode-cn.com/problems/largest-rectangle-in-histogram/
+func LargestRectangleArea(heights []int) int {
+	if len(heights) == 0 {
+		return 0
+	}
+
+	stack := make([]int, 0)
+	max := 0
+	for i := 0; i <= len(heights); i++ {
+		var cur int
+		if i == len(heights) {
+			cur = 0
+		} else {
+			cur = heights[i]
+		}
+
+		// 当高度小于栈顶对应的元素高度时，出栈
+		for len(stack) != 0 && cur < heights[stack[len(stack)-1]] {
+			pop := stack[len(stack)-1]
+			stack = stack[:len(stack)-1]
+			h := heights[pop]
+
+			w := i
+			if len(stack) != 0 {
+				peek := stack[len(stack)-1]
+				w = i - peek - 1
+			}
+			if h*w > max {
+				max = h * w
+			}
+		}
+
+		stack = append(stack, i)
+	}
+	return max
+}
