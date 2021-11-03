@@ -263,14 +263,14 @@ func LargestRectangleArea(heights []int) int {
 			cur = heights[i]
 		}
 
-		// 当高度小于栈顶对应的元素高度时，出栈
+		// 当高度小于栈顶对应的元素高度时，出栈，从右向左计算
 		for len(stack) != 0 && cur < heights[stack[len(stack)-1]] {
 			pop := stack[len(stack)-1]
 			stack = stack[:len(stack)-1]
 			h := heights[pop]
 
 			w := i
-			if len(stack) != 0 {
+			if len(stack) != 0 { // 栈里的值，肯定是比栈顶要小的，因为如果比栈顶大，就已经计算出矩形面积并且出栈了，所以直接拿当前栈顶，肯定是上一个栈顶的左侧严格小的下标
 				peek := stack[len(stack)-1]
 				w = i - peek - 1
 			}

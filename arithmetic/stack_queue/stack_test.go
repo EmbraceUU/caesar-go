@@ -37,3 +37,15 @@ func TestNumIslands(t *testing.T) {
 	}
 	NumIslands(grid)
 }
+
+func TestLargestRectangleArea(t *testing.T) {
+	heights := make([]int, 0)
+	heights = append(heights, 2)
+	heights = append(heights, 1)
+	heights = append(heights, 5)
+	heights = append(heights, 6)
+	heights = append(heights, 2)
+	heights = append(heights, 3)
+	h := LargestRectangleArea(heights)
+	fmt.Println(h)
+}
