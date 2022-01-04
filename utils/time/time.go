@@ -19,21 +19,21 @@ type Segment struct {
 	End   int
 }
 
-// 字符串转时间戳, 加时区设置
+// StrToTimestampLoc 字符串转时间戳, 加时区设置
 func StrToTimestampLoc(locName, dateStr string) int64 {
 	loc, _ := time.LoadLocation(locName)
 	tm2, _ := time.ParseInLocation(LayoutStrSec, dateStr, loc)
 	return tm2.Unix()
 }
 
-// 获取当前日期, 加时区设置
+// GetDateNowLoc 获取当前日期, 加时区设置
 func GetDateNowLoc(locName string) string {
 	loc, _ := time.LoadLocation(locName)
 	data := time.Now().In(loc).Format(DateFormat)
 	return data
 }
 
-// UTC字符串转时间戳
+// StrToTimestampUTC UTC字符串转时间戳
 func StrToTimestampUTC(dateStr string) int64 {
 	d := dateStr + "T08:00:00.000Z"
 	t, err := time.Parse(LayoutStr, d)
@@ -217,7 +217,7 @@ func UTCStringToTime(ts string) time.Time {
 	return timestamp
 }
 
-// 自定义一个定时器
+// Cron 自定义一个定时器
 func Cron() {
 	for {
 		println(time.Now().Unix())
