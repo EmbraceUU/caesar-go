@@ -257,6 +257,7 @@ func LargestRectangleArea(heights []int) int {
 	max := 0
 	for i := 0; i <= len(heights); i++ {
 		var cur int
+		// 这里增加了一个元素, 即最右边加了一个0高度的元素
 		if i == len(heights) {
 			cur = 0
 		} else {
@@ -272,6 +273,9 @@ func LargestRectangleArea(heights []int) int {
 			w := i
 			if len(stack) != 0 { // 栈里的值，肯定是比栈顶要小的，因为如果比栈顶大，就已经计算出矩形面积并且出栈了，所以直接拿当前栈顶，肯定是上一个栈顶的左侧严格小的下标
 				peek := stack[len(stack)-1]
+				// 计算出当前高度的最大宽度, 因为右边已经根据for循环的条件判断出比当前高度小了,
+				// 而栈又是一个递增单调栈, 当前栈的栈顶肯定比当前高度低,
+				// 所以i-peek-1是当前高度的从右到左的最大宽度
 				w = i - peek - 1
 			}
 			if h*w > max {
