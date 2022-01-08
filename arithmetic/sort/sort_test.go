@@ -23,3 +23,23 @@ func TestQuickSort(t *testing.T) {
 	nums = QuickSort(nums)
 	fmt.Println(nums)
 }
+
+func TestSelectionSort(t *testing.T) {
+	nums1 := [...]int{4, 10, 2, 5, 9, 6, 7, 3, 8, 1}
+	nums := make([]int, 0)
+	for _, v := range nums1 {
+		nums = append(nums, v)
+	}
+	SelectionSort(nums)
+	fmt.Println(nums)
+}
+
+func TestBubbleSort(t *testing.T) {
+	nums1 := [...]int{4, 10, 2, 5, 9, 6, 7, 3, 8, 1}
+	nums := make([]int, 0)
+	for _, v := range nums1 {
+		nums = append(nums, v)
+	}
+	BubbleSort(nums)
+	fmt.Println(nums)
+}
