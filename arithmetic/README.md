@@ -85,6 +85,16 @@ BFS 广度优先遍历 改进版
 快速排序 分治法
 关键是如何进行分区
 
+#### SelectionSort
+
+选择排序
+时间复杂度为 O(N^2)
+
+#### TestBubbleSort
+
+冒泡排序
+时间复杂度为 O(N^2)
+
 ### Links
 
 #### DeleteDuplicates
