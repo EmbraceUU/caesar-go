@@ -95,6 +95,11 @@ BFS 广度优先遍历 改进版
 冒泡排序
 时间复杂度为 O(N^2)
 
+#### InsertionSort
+
+插入排序
+时间复杂度
+
 ### Links
 
 #### DeleteDuplicates

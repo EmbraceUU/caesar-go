@@ -43,3 +43,13 @@ func TestBubbleSort(t *testing.T) {
 	BubbleSort(nums)
 	fmt.Println(nums)
 }
+
+func TestInsertionSort(t *testing.T) {
+	nums1 := [...]int{4, 10, 2, 5, 9, 6, 7, 3, 8, 1}
+	nums := make([]int, 0)
+	for _, v := range nums1 {
+		nums = append(nums, v)
+	}
+	InsertionSort(nums)
+	fmt.Println(nums)
+}
