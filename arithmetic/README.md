@@ -90,7 +90,7 @@ BFS 广度优先遍历 改进版
 选择排序
 时间复杂度为 O(N^2)
 
-#### TestBubbleSort
+#### BubbleSort
 
 冒泡排序
 时间复杂度为 O(N^2)
@@ -98,7 +98,14 @@ BFS 广度优先遍历 改进版
 #### InsertionSort
 
 插入排序
-时间复杂度
+最差时间复杂度 O(N^2)
+最好时间复杂度 O(N)
+
+#### FindPeakElement
+
+查找局部峰值
+使用二分法查找
+时间复杂度为 O(log n)
 
 ### Links
 

@@ -53,3 +53,12 @@ func TestInsertionSort(t *testing.T) {
 	InsertionSort(nums)
 	fmt.Println(nums)
 }
+
+func TestFindPeakElement(t *testing.T) {
+	nums1 := [...]int{1, 2}
+	nums := make([]int, 0)
+	for _, v := range nums1 {
+		nums = append(nums, v)
+	}
+	fmt.Println(FindPeakElement(nums))
+}
