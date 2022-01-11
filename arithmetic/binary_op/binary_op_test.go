@@ -7,3 +7,13 @@ func TestSingleNumberII(t *testing.T) {
 	num := SingleNumberII(nums)
 	t.Log(num)
 }
+
+func TestHammingWeight(t *testing.T) {
+	var num = uint32(234)
+	t.Log(HammingWeight(num))
+}
+
+func TestCountBits(t *testing.T) {
+	var num = 1
+	t.Log(CountBits(num))
+}
