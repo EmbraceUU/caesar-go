@@ -17,3 +17,8 @@ func TestCountBits(t *testing.T) {
 	var num = 1
 	t.Log(CountBits(num))
 }
+
+func TestReverseBits(t *testing.T) {
+	var num = uint32(4294967293)
+	t.Log(ReverseBits(num))
+}
