@@ -1,4 +1,4 @@
-package binary_op
+package op
 
 // ReverseBits 颠倒给定的 32 位无符号整数的二进制位。
 // 输入：n = 00000010100101000001111010011100

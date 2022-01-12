@@ -1,4 +1,4 @@
-package linked_list
+package list
 
 // ListNode 单向链表
 type ListNode struct {

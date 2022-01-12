@@ -1,4 +1,4 @@
-package binary_op
+package op
 
 import "testing"
 

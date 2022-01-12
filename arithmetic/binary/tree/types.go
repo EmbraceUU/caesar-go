@@ -1,4 +1,4 @@
-package binary_tree
+package tree
 
 // TreeNode 节点类型
 type TreeNode struct {
