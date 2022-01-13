@@ -24,3 +24,8 @@ func TestMatrixSearch(t *testing.T) {
 func TestFirstBadVersion(t *testing.T) {
 	t.Log(FirstBadVersion(1))
 }
+
+func TestFindMin(t *testing.T) {
+	nums := []int{4, 5, 6, 7, 0, 1, 2}
+	t.Log(FindMin(nums))
+}
