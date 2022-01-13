@@ -20,3 +20,7 @@ func TestMatrixSearch(t *testing.T) {
 	target := 11
 	t.Log(MatrixSearch(matrix, target))
 }
+
+func TestFirstBadVersion(t *testing.T) {
+	t.Log(FirstBadVersion(1))
+}
