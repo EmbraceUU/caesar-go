@@ -34,3 +34,9 @@ func TestFindMinII(t *testing.T) {
 	nums := []int{3, 1, 1}
 	t.Log(FindMinII(nums))
 }
+
+func TestRotatedSortedArraySearchII(t *testing.T) {
+	nums := []int{2, 2, 2}
+	var search RotatedSortedArraySearchII
+	t.Log(search.search(nums, 1))
+}
