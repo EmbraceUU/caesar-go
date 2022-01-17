@@ -69,3 +69,10 @@ func TestQuickSortII(t *testing.T) {
 	QuickSortII(nums)
 	t.Log(nums)
 }
+
+func TestHeapSort(t *testing.T) {
+	nums := []int{3, 5, 1, 4, 29, 12, 2, 6}
+	//nums := []int{13, 5}
+	HeapSort(nums)
+	t.Log(nums)
+}
