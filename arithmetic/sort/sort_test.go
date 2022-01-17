@@ -62,3 +62,10 @@ func TestFindPeakElement(t *testing.T) {
 	}
 	fmt.Println(FindPeakElement(nums))
 }
+
+func TestQuickSortII(t *testing.T) {
+	//nums := []int{3, 5, 1, 4, 29, 12, 2, 6}
+	nums := []int{13, 5}
+	QuickSortII(nums)
+	t.Log(nums)
+}
