@@ -76,3 +76,9 @@ func TestHeapSort(t *testing.T) {
 	HeapSort(nums)
 	t.Log(nums)
 }
+
+func TestContainsNearbyDuplicate(t *testing.T) {
+	nums := []int{1, 0, 1, 1}
+	k := 1
+	t.Log(ContainsNearbyDuplicate(nums, k))
+}
