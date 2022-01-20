@@ -1,4 +1,4 @@
-package list
+package links
 
 import (
 	"fmt"
@@ -133,4 +133,13 @@ func TestIsPalindrome(t *testing.T) {
 	is := IsPalindrome(head)
 
 	fmt.Println(is)
+}
+
+func TestAddTwoNumbers(t *testing.T) {
+	a1 := []int{9, 9, 9, 9}
+	a2 := []int{9, 9, 9, 9, 9, 9, 9}
+	l1 := NewListNode(a1)
+	l2 := NewListNode(a2)
+
+	t.Log(PrintListNode(AddTwoNumbers(l1, l2)))
 }

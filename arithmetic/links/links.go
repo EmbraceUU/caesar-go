@@ -1,4 +1,4 @@
-package list
+package links
 
 // DeleteDuplicates 给定一个按升序排序的链表
 // 删除链表中重复的元素
