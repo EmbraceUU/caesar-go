@@ -1,43 +1,5 @@
 package tree
 
-// 以根访问顺序决定是什么遍历
-// 左子树都是优先右子树
-
-// PostorderTraversal 【后序遍历 非递归】
-// 左子树 -> 右子树 -> 根节点
-func PostorderTraversal(root *Node) []int {
-	if root == nil {
-		return nil
-	}
-
-	result := make([]int, 0)
-	stack := make([]*Node, 0)
-	var lastVisit *Node
-
-	for root != nil || len(stack) > 0 {
-		// 先访问左子树
-		for root != nil {
-			stack = append(stack, root)
-			root = root.Left
-		}
-
-		node := stack[len(stack)-1]
-		// 增加一个lastVisit, 确保右子树已经弹出, 再弹出根节点
-		if node.Right == nil || node.Right == lastVisit {
-			stack = stack[:len(stack)-1]
-			result = append(result, node.Val)
-
-			lastVisit = node
-		} else {
-			root = node.Right
-		}
-	}
-
-	return result
-}
-
-// --------------------------- 分界线 --------------------------- //
-
 // LevelOrder 【BFS 广度优先搜索 第一版】
 func LevelOrder(root *Node) [][]int {
 	result := make([][]int, 0)
