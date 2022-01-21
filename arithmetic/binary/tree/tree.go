@@ -1,81 +1,18 @@
 package tree
 
-import (
-	"fmt"
-)
-
 // 以根访问顺序决定是什么遍历
 // 左子树都是优先右子树
 
-// PreorderTraversal 【前序遍历 递归】
-func PreorderTraversal(root *TreeNode) {
-	if root == nil {
-		return
-	}
-	// 访问当前根节点
-	fmt.Println(root.Val)
-	// 前序遍历左子树
-	PreorderTraversal(root.Left)
-	// 前序遍历右子树
-	PreorderTraversal(root.Right)
-}
-
-// PreorderTraversalII 【前序遍历 非递归】
-func PreorderTraversalII(root *TreeNode) {
-	if root == nil {
-		return
-	}
-	stack := make([]*TreeNode, 0)
-	for root != nil || len(stack) >= 0 {
-		for root != nil {
-			// 访问当前节点
-			fmt.Println(root.Val)
-			stack = append(stack, root)
-			// 转移到左子树
-			root = root.Left
-			// 到叶子节点后退出
-		}
-		// LIFO pop出根节点
-		node := stack[len(stack)-1]
-		stack = stack[:len(stack)-1]
-		// 开始前序遍历右子树
-		root = node.Right
-	}
-}
-
-// InorderTraversal 【中序遍历 非递归】
-// 左子树 -> 根节点 -> 右子树
-func InorderTraversal(root *TreeNode) {
-	if root == nil {
-		return
-	}
-	stack := make([]*TreeNode, 0)
-	for root != nil || len(stack) > 0 {
-		// 一直向左压栈
-		for root != nil {
-			stack = append(stack, root)
-			root = root.Left
-		}
-		// 当到达左子树尽头, 开始pop
-		node := stack[len(stack)-1]
-		stack = stack[:len(stack)-1]
-		// 打印节点数据
-		fmt.Println(node.Val)
-		// 转移到右子树, 再中序遍历
-		root = node.Right
-	}
-}
-
 // PostorderTraversal 【后序遍历 非递归】
 // 左子树 -> 右子树 -> 根节点
-func PostorderTraversal(root *TreeNode) []int {
+func PostorderTraversal(root *Node) []int {
 	if root == nil {
 		return nil
 	}
 
 	result := make([]int, 0)
-	stack := make([]*TreeNode, 0)
-	var lastVisit *TreeNode
+	stack := make([]*Node, 0)
+	var lastVisit *Node
 
 	for root != nil || len(stack) > 0 {
 		// 先访问左子树
@@ -101,45 +38,19 @@ func PostorderTraversal(root *TreeNode) []int {
 
 // --------------------------- 分界线 --------------------------- //
 
-// PreorderTraversalIII 【DFS 深度遍历 分治法】
-// DFS中 关键点是【递归以及回溯】
-// 采用递归的方式, 先分别递归返回结果, 然后合并结果, 合并的时候, 可以控制访问的顺序
-// 可以简单的实现 preorder/inorder/postorder 这三种顺序
-func PreorderTraversalIII(root *TreeNode) []int {
-	result := divideAndConquer(root)
-	return result
-}
-
-func divideAndConquer(root *TreeNode) []int {
-	var result []int
-	if root == nil {
-		return nil
-	}
-
-	left := divideAndConquer(root.Left)
-	right := divideAndConquer(root.Right)
-
-	result = append(result, root.Val)
-	result = append(result, left...)
-	result = append(result, right...)
-	return result
-}
-
-// --------------------------- 分界线 --------------------------- //
-
 // LevelOrder 【BFS 广度优先搜索 第一版】
-func LevelOrder(root *TreeNode) [][]int {
+func LevelOrder(root *Node) [][]int {
 	result := make([][]int, 0)
 	if root == nil {
 		return nil
 	}
 
-	queue := make([]*TreeNode, 0)
+	queue := make([]*Node, 0)
 	queue = append(queue, root)
 
 	for len(queue) > 0 {
 		var level []int
-		var queueTemp []*TreeNode
+		var queueTemp []*Node
 		for i := range queue {
 			level = append(level, queue[i].Val)
 			if queue[i].Left != nil {
@@ -159,12 +70,12 @@ func LevelOrder(root *TreeNode) [][]int {
 // LevelOrderII 【BFS 广度优先搜索 改进版】
 // 遍历当前层，并标记下一层, 然后再遍历下一层, 以此循环遍历
 // TODO 为什么改进版比第一版的内存消耗更大了 ？
-func LevelOrderII(root *TreeNode) [][]int {
+func LevelOrderII(root *Node) [][]int {
 	result := make([][]int, 0)
 	if root == nil {
 		return nil
 	}
-	queue := make([]*TreeNode, 0)
+	queue := make([]*Node, 0)
 	queue = append(queue, root)
 	// 遍历当前层
 	for len(queue) > 0 {
@@ -194,7 +105,7 @@ func LevelOrderII(root *TreeNode) [][]int {
 
 // LevelOrderBottom 自下而上BFS
 // 使用LeverOrder的方法，把结果反转即可
-func LevelOrderBottom(root *TreeNode) [][]int {
+func LevelOrderBottom(root *Node) [][]int {
 	result := LevelOrder(root)
 	reverse(result)
 	return result
@@ -208,19 +119,19 @@ func reverse(result [][]int) {
 }
 
 // ZigzagLevelOrder 自上而下, Z字形遍历
-func ZigzagLevelOrder(root *TreeNode) [][]int {
+func ZigzagLevelOrder(root *Node) [][]int {
 	result := make([][]int, 0)
 	if root == nil {
 		return result
 	}
 
-	queue := make([]*TreeNode, 0)
+	queue := make([]*Node, 0)
 	queue = append(queue, root)
 	var toggle bool
 
 	for len(queue) > 0 {
 		list := make([]int, 0)
-		queueTemp := make([]*TreeNode, 0)
+		queueTemp := make([]*Node, 0)
 
 		for i := 0; i < len(queue); i++ {
 			list = append(list, queue[i].Val)
@@ -253,7 +164,7 @@ func reverseII(data []int) {
 // --------------------------- 分界线 --------------------------- //
 
 // MaxDepth 求二叉树的最大深度
-func MaxDepth(root *TreeNode) int {
+func MaxDepth(root *Node) int {
 	if root == nil {
 		return 0
 	}
@@ -274,7 +185,7 @@ func MaxDepth(root *TreeNode) int {
 // 分治法 + 递归
 // 判断条件 左边平衡 && 右边平衡 && 两边高度差 <= 1
 // 技巧: 返回数据二义性, 用-1表示不平衡, 用>=0表示高度
-func IsBalanced(root *TreeNode) bool {
+func IsBalanced(root *Node) bool {
 	if root == nil {
 		return true
 	}
@@ -286,7 +197,7 @@ func IsBalanced(root *TreeNode) bool {
 	return true
 }
 
-func isBalanced(root *TreeNode) int {
+func isBalanced(root *Node) int {
 	if root == nil {
 		return 0
 	}
@@ -312,10 +223,10 @@ func isBalanced(root *TreeNode) int {
 // MaxPathSum 二叉树中的最大路径和
 // 路径每到一个节点，有 3 种选择：1. 停在当前节点。2. 走到左子节点。3. 走到右子节点。
 // 使用dfs, 每次更新maxSum，然后每次返回该节点的最大路径，并且负数时返回0
-func MaxPathSum(root *TreeNode) int {
+func MaxPathSum(root *Node) int {
 	var maxSum int
-	var dfs func(root *TreeNode) int
-	dfs = func(root *TreeNode) int {
+	var dfs func(root *Node) int
+	dfs = func(root *Node) int {
 		if root == nil {
 			return 0
 		}
@@ -344,13 +255,13 @@ func max(a, b int) int {
 // [3,5,1,6,2,0,8,null,null,7,4]
 //	5
 //	4
-func LowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
-	pPath := make([]*TreeNode, 0)
-	qPath := make([]*TreeNode, 0)
+func LowestCommonAncestor(root, p, q *Node) *Node {
+	pPath := make([]*Node, 0)
+	qPath := make([]*Node, 0)
 
-	var findPath func(root, p *TreeNode, path []*TreeNode) []*TreeNode
+	var findPath func(root, p *Node, path []*Node) []*Node
 
-	findPath = func(root, p *TreeNode, path []*TreeNode) []*TreeNode {
+	findPath = func(root, p *Node, path []*Node) []*Node {
 		if root == nil {
 			return path
 		}
@@ -399,7 +310,7 @@ func LowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 // LowestCommonAncestorII
 // 通过递归对二叉树进行后序遍历，当遇到节点 p 或 q 时返回。从底至顶回溯，
 // 当节点 p, q 在节点 root 的异侧时，节点 root 即为最近公共祖先，则向上返回 root。
-func LowestCommonAncestorII(root, p, q *TreeNode) *TreeNode {
+func LowestCommonAncestorII(root, p, q *Node) *Node {
 	// 如果root为nil，返回nil
 	if root == nil {
 		return nil
@@ -431,12 +342,12 @@ func LowestCommonAncestorII(root, p, q *TreeNode) *TreeNode {
 
 // IsValidBST 验证二叉搜索树
 // 思路: 左子树返回一个最大的数, 右子树返回一个最小的数, 然后和根节点比较
-func IsValidBST(root *TreeNode) bool {
+func IsValidBST(root *Node) bool {
 	_, _, isBST := maxAndMin(root)
 	return isBST
 }
 
-func maxAndMin(root *TreeNode) (int, int, bool) {
+func maxAndMin(root *Node) (int, int, bool) {
 	if root == nil {
 		return 0, 0, true
 	}
@@ -469,7 +380,7 @@ func maxAndMin(root *TreeNode) (int, int, bool) {
 
 // IsValidBSTII 验证二叉搜索树
 // 使用中序遍历二叉树，然后判断排序是否正确
-func IsValidBSTII(root *TreeNode) bool {
+func IsValidBSTII(root *Node) bool {
 	result := make([]int, 0)
 	inOrder(root, &result)
 
@@ -484,7 +395,7 @@ func IsValidBSTII(root *TreeNode) bool {
 	return true
 }
 
-func inOrder(root *TreeNode, result *[]int) {
+func inOrder(root *Node, result *[]int) {
 	if root == nil {
 		return
 	}
@@ -496,9 +407,9 @@ func inOrder(root *TreeNode, result *[]int) {
 
 // InsertIntoBST 插入二叉搜索树
 // 将新插入的节点插入到叶子节点即可
-func InsertIntoBST(root *TreeNode, val int) *TreeNode {
+func InsertIntoBST(root *Node, val int) *Node {
 	if root == nil {
-		return &TreeNode{
+		return &Node{
 			Val: val,
 		}
 	}
@@ -507,7 +418,7 @@ func InsertIntoBST(root *TreeNode, val int) *TreeNode {
 	for node != nil {
 		if node.Val > val {
 			if node.Left == nil {
-				node.Left = &TreeNode{
+				node.Left = &Node{
 					Val: val,
 				}
 				break
@@ -515,7 +426,7 @@ func InsertIntoBST(root *TreeNode, val int) *TreeNode {
 			node = node.Left
 		} else {
 			if node.Right == nil {
-				node.Right = &TreeNode{
+				node.Right = &Node{
 					Val: val,
 				}
 				break

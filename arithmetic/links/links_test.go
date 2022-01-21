@@ -136,8 +136,8 @@ func TestIsPalindrome(t *testing.T) {
 }
 
 func TestAddTwoNumbers(t *testing.T) {
-	a1 := []int{9, 9, 9, 9}
-	a2 := []int{9, 9, 9, 9, 9, 9, 9}
+	a1 := []int{9, 9, 9, 9, 9}
+	a2 := []int{9, 9, 9, 9, 9, 9, 9, 9, 9, 9}
 	l1 := NewListNode(a1)
 	l2 := NewListNode(a2)
 

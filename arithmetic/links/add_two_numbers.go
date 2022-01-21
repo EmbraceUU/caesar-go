@@ -50,9 +50,10 @@ func AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	*/
 
 	var tail, head *ListNode
-	carry := 0
+	var carry int
+
 	for l1 != nil || l2 != nil {
-		n1, n2 := 0, 0
+		var n1, n2 int
 		if l1 != nil {
 			n1 = l1.Val
 			l1 = l1.Next
@@ -61,8 +62,10 @@ func AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			n2 = l2.Val
 			l2 = l2.Next
 		}
+
 		sum := n1 + n2 + carry
 		sum, carry = sum%10, sum/10
+
 		if head == nil {
 			head = &ListNode{Val: sum}
 			tail = head
@@ -71,8 +74,12 @@ func AddTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			tail = tail.Next
 		}
 	}
+
 	if carry > 0 {
-		tail.Next = &ListNode{Val: carry}
+		tail.Next = &ListNode{
+			Val: carry,
+		}
 	}
+
 	return head
 }
