@@ -1,74 +1,9 @@
 package tree
 
-// LevelOrder 【BFS 广度优先搜索 第一版】
-func LevelOrder(root *Node) [][]int {
-	result := make([][]int, 0)
-	if root == nil {
-		return nil
-	}
-
-	queue := make([]*Node, 0)
-	queue = append(queue, root)
-
-	for len(queue) > 0 {
-		var level []int
-		var queueTemp []*Node
-		for i := range queue {
-			level = append(level, queue[i].Val)
-			if queue[i].Left != nil {
-				queueTemp = append(queueTemp, queue[i].Left)
-			}
-			if queue[i].Right != nil {
-				queueTemp = append(queueTemp, queue[i].Right)
-			}
-		}
-		result = append(result, level)
-		queue = queueTemp
-	}
-
-	return result
-}
-
-// LevelOrderII 【BFS 广度优先搜索 改进版】
-// 遍历当前层，并标记下一层, 然后再遍历下一层, 以此循环遍历
-// TODO 为什么改进版比第一版的内存消耗更大了 ？
-func LevelOrderII(root *Node) [][]int {
-	result := make([][]int, 0)
-	if root == nil {
-		return nil
-	}
-	queue := make([]*Node, 0)
-	queue = append(queue, root)
-	// 遍历当前层
-	for len(queue) > 0 {
-		// 当前level遍历的结果
-		list := make([]int, 0)
-		// 先得到当前queue的长度，遍历当前层，再添加下一层
-		l := len(queue)
-		// 只遍历预先固定的长度, 这样不需要再每次创建queueTemp~~
-		for i := 0; i < l; i++ {
-			// 每次将队首出列, 先进先出, 这样即使queue变化了, 也不影响下面的继续访问
-			level := queue[0]
-			queue = queue[1:]
-
-			list = append(list, level.Val)
-			if level.Left != nil {
-				queue = append(queue, level.Left)
-			}
-			if level.Right != nil {
-				queue = append(queue, level.Right)
-			}
-		}
-		// 遍历完当前层, 将结果集合并到result中
-		result = append(result, list)
-	}
-	return result
-}
-
 // LevelOrderBottom 自下而上BFS
 // 使用LeverOrder的方法，把结果反转即可
 func LevelOrderBottom(root *Node) [][]int {
-	result := LevelOrder(root)
+	result := LevelOrderII(root)
 	reverse(result)
 	return result
 }
