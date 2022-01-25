@@ -78,45 +78,6 @@ func MaxDepth(root *Node) int {
 
 // --------------------------- 分界线 --------------------------- //
 
-// IsBalanced 平衡二叉树
-// 分治法 + 递归
-// 判断条件 左边平衡 && 右边平衡 && 两边高度差 <= 1
-// 技巧: 返回数据二义性, 用-1表示不平衡, 用>=0表示高度
-func IsBalanced(root *Node) bool {
-	if root == nil {
-		return true
-	}
-
-	depth := isBalanced(root)
-	if depth < 0 {
-		return false
-	}
-	return true
-}
-
-func isBalanced(root *Node) int {
-	if root == nil {
-		return 0
-	}
-
-	dl := isBalanced(root.Left)
-	dr := isBalanced(root.Right)
-
-	if dl < 0 || dr < 0 {
-		return -1
-	}
-
-	if dl-dr > 1 || dl-dr < -1 {
-		return -1
-	}
-
-	if dl > dr {
-		return dl + 1
-	} else {
-		return dr + 1
-	}
-}
-
 // MaxPathSum 二叉树中的最大路径和
 // 路径每到一个节点，有 3 种选择：1. 停在当前节点。2. 走到左子节点。3. 走到右子节点。
 // 使用dfs, 每次更新maxSum，然后每次返回该节点的最大路径，并且负数时返回0
