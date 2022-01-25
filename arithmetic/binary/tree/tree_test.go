@@ -2,13 +2,8 @@ package tree
 
 import "testing"
 
-func TestNewTreeNode(t *testing.T) {
-	arr := [...]int{1, 1}
-	nums := make([]int, 0)
-	for _, v := range arr {
-		nums = append(nums, v)
-	}
-
+func TestIsValidBSTII(t *testing.T) {
+	nums := []int{2, 1, 3}
 	root := NewTreeNode(nums)
-	IsValidBST(root)
+	t.Log(IsValidBST(root))
 }
