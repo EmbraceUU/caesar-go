@@ -14,3 +14,10 @@ func TestThreeSum(t *testing.T) {
 	nums := []int{1, -1, -1, 0}
 	t.Log(ThreeSum(nums))
 }
+
+func TestRotate(t *testing.T) {
+	nums := []int{-1, -100, 3, 99}
+	k := 2
+	Rotate(nums, k)
+	t.Log(nums)
+}
