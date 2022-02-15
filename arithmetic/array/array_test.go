@@ -21,3 +21,15 @@ func TestRotate(t *testing.T) {
 	Rotate(nums, k)
 	t.Log(nums)
 }
+
+func TestPlusOne(t *testing.T) {
+	nums := []int{9, 9, 9, 9, 9}
+	result := PlusOne(nums)
+	t.Log(result)
+}
+
+func TestMoveZeroes(t *testing.T) {
+	nums := []int{0, 1, 0, 3, 12}
+	MoveZeroes(nums)
+	t.Log(nums)
+}
