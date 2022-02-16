@@ -12,3 +12,9 @@ func TestLongestCommonPrefix(t *testing.T) {
 	}
 	t.Log(LongestCommonPrefixIII(strs))
 }
+
+func TestReverseString(t *testing.T) {
+	s := []byte("hello")
+	ReverseString(s)
+	t.Log(string(s))
+}
