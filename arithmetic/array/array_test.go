@@ -33,3 +33,13 @@ func TestMoveZeroes(t *testing.T) {
 	MoveZeroes(nums)
 	t.Log(nums)
 }
+
+func TestRotateImage(t *testing.T) {
+	matrix := [][]int{
+		{1, 2, 3},
+		{4, 5, 6},
+		{7, 8, 9},
+	}
+	RotateImage(matrix)
+	t.Log(matrix)
+}
