@@ -18,3 +18,7 @@ func TestReverseString(t *testing.T) {
 	ReverseString(s)
 	t.Log(string(s))
 }
+
+func TestIsPalindrome(t *testing.T) {
+	t.Log(IsPalindrome(""))
+}
