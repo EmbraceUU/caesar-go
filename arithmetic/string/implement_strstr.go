@@ -43,13 +43,16 @@ func strStr(haystack string, needle string) int {
 	return ans
 }
 
+// strStrKMP
+// 【KMP】
 func strStrKMP(haystack string, needle string) int {
 	n, m := len(haystack), len(needle)
 	if m == 0 {
 		return 0
 	}
+
+	// 生成 pi
 	pi := make([]int, m)
-	// a(j), b(i), e, a, b, f, a, b, e, a, b, e
 	for i, j := 1, 0; i < m; i++ {
 		for j > 0 && needle[i] != needle[j] {
 			j = pi[j-1]
@@ -60,10 +63,14 @@ func strStrKMP(haystack string, needle string) int {
 		pi[i] = j
 	}
 
+	// 遍历原字符串
 	for i, j := 0, 0; i < n; i++ {
+		// 当 原字符串和 匹配字符串的当前位置不相同时，
+		// 如果 j > 0，j 跳过一个最大公共前缀的长度 j = pi[i-1]
 		for j > 0 && haystack[i] != needle[j] {
-			j = pi[j-1]
+			j = pi[i-1]
 		}
+		// 如果相同，j 往后挪一个位置
 		if haystack[i] == needle[j] {
 			j++
 		}
@@ -71,5 +78,6 @@ func strStrKMP(haystack string, needle string) int {
 			return i - m + 1
 		}
 	}
+
 	return -1
 }

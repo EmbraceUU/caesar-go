@@ -31,3 +31,7 @@ func TestMyAtoi(t *testing.T) {
 func TestStrStr(t *testing.T) {
 	t.Log(StrStr("mississippi", "issip"))
 }
+
+func TestCountAndSay(t *testing.T) {
+	t.Log(CountAndSay(10))
+}

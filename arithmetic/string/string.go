@@ -15,3 +15,7 @@ func MyAtoi(s string) int {
 func StrStr(haystack string, needle string) int {
 	return strStrKMP(haystack, needle)
 }
+
+func CountAndSay(n int) string {
+	return countAndSay(n)
+}
