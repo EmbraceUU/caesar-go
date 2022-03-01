@@ -22,3 +22,12 @@ func TestReverseString(t *testing.T) {
 func TestIsPalindrome(t *testing.T) {
 	t.Log(IsPalindrome(""))
 }
+
+func TestMyAtoi(t *testing.T) {
+	ans := MyAtoi("2147483648")
+	t.Log(ans)
+}
+
+func TestStrStr(t *testing.T) {
+	t.Log(StrStr("mississippi", "issip"))
+}
