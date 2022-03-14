@@ -60,38 +60,8 @@ func DeleteDuplicatesII(head *ListNode) *ListNode {
 	return dummy.Next
 }
 
-// ReverseList 反转链表
-// 使用一个fast和slow遍历list，并反转list
-// 错误1. 没有加上slow.Next = nil，导致末尾出现无限循环
-// https://leetcode-cn.com/problems/reverse-linked-list/
 func ReverseList(head *ListNode) *ListNode {
-	if head == nil || head.Next == nil {
-		return head
-	}
-
-	fast := head.Next
-	slow := head
-	slow.Next = nil
-	for fast != nil {
-		tmp := fast.Next
-		fast.Next = slow
-		slow = fast
-		fast = tmp
-	}
-
-	return slow
-}
-
-// ReverseListLatest 反转链表，递归做法
-// 关键是：递归到最后一个节点，作为新的头结点返回， 然后每一步都自己反转自己 head.Next.Next = head, 这样不需要借助其他节点。
-func ReverseListLatest(head *ListNode) *ListNode {
-	if head == nil || head.Next == nil {
-		return head
-	}
-	newHead := ReverseListLatest(head.Next)
-	head.Next.Next = head
-	head.Next = nil
-	return newHead
+	return reverseList(head)
 }
 
 // ReverseBetween 反转链表
@@ -190,34 +160,8 @@ func ReverseBetweenLatest(head *ListNode, left int, right int) *ListNode {
 	return dummy.Next
 }
 
-// MergeTwoLists 将两个升序链表合并为一个新的 升序 链表并返回。
-// 新链表是通过拼接给定的两个链表的所有节点组成的。
-// 借助dummy node
-// https://leetcode-cn.com/problems/merge-two-sorted-lists/
 func MergeTwoLists(l1 *ListNode, l2 *ListNode) *ListNode {
-	dummy := &ListNode{}
-	head := dummy
-	// 同时遍历两个链表，从小到大拼接，直到有一个链表为nil
-	for l1 != nil && l2 != nil {
-		if l1.Val <= l2.Val {
-			head.Next = l1
-			l1 = l1.Next
-		} else {
-			head.Next = l2
-			l2 = l2.Next
-		}
-		head = head.Next
-	}
-
-	// 将另外一个不为nil的链表拼接在后面
-	if l1 != nil {
-		head.Next = l1
-	}
-	if l2 != nil {
-		head.Next = l2
-	}
-
-	return dummy.Next
+	return mergeTwoLists(l1, l2)
 }
 
 // Partition 给你一个链表的头节点 head 和一个特定值 x ，请你对链表进行分隔，使得所有 小于 x 的节点都出现在 大于或等于 x 的节点之前。
@@ -441,51 +385,8 @@ func DetectCycleLatest(head *ListNode) *ListNode {
 	return nil
 }
 
-// IsPalindrome 请判断一个链表是否为回文链表。
-// 1->2->2->1
-// 思路:
-// 1. 用快慢指针找到中点
-// 2. 反转后半段链表
-// 3. 对比两段链表是否一致
-// 错误点： 没有正确理解题意，1->0->1 也是回文链表，所以不需要判断最后 head 和 next 是否同时为 nil
-// https://leetcode-cn.com/problems/palindrome-linked-list/
 func IsPalindrome(head *ListNode) bool {
-	if head == nil || head.Next == nil {
-		return true
-	}
-	// 1->2->3->4->4->3->2->1
-	fast := head.Next
-	slow := head
-	for fast != nil && fast.Next != nil {
-		fast = fast.Next.Next
-		slow = slow.Next
-	}
-	// 1->2->3->4(slow)->4->3->2->1(fast)->nil
-
-	mid := slow.Next
-	slow.Next = nil
-
-	// 1->2->3->4(slow)->4->3->2->1->nil
-	// 1->2->3->4 nil<-4(next) 3(mid)->2->1->nil
-	// 1->2->3->4 nil<-4<-3(next) 2(mid)->1->nil
-	// 1->2->3->4 nil<-4<-3<-2<-1(next) nil(mid)
-	var next *ListNode
-	for mid != nil {
-		tmp := mid.Next // 3 2
-		mid.Next = next // nil
-		next = mid
-		mid = tmp
-	}
-
-	for next != nil && head != nil {
-		if next.Val != head.Val {
-			return false
-		}
-		head = head.Next
-		next = next.Next
-	}
-
-	return true
+	return isPalindromeByDN(head)
 }
 
 // CopyRandomList 复制链表中的指针都不应指向原链表中的节点 。
@@ -567,4 +468,12 @@ func CopyRandomListLatest(head *Node) *Node {
 	// 原始链表头：head 1->2->3
 	// 克隆的链表头：cloneHead 1'->2'->3'
 	return cloneHead
+}
+
+func DeleteNode(node *ListNode) {
+	deleteNode(node)
+}
+
+func RemoveNthFromEnd(head *ListNode, n int) *ListNode {
+	return removeNthFromEndByDN(head, n)
 }

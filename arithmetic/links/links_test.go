@@ -31,16 +31,9 @@ func TestDeleteDuplicatesII(t *testing.T) {
 }
 
 func TestReverseList(t *testing.T) {
-	numsArr := [...]int{1, 2, 3, 4, 5}
-	nums := make([]int, 0)
-	for _, v := range numsArr {
-		nums = append(nums, v)
-	}
-
-	head := NewListNode(nums)
-
+	head := NewListNode([]int{1, 2, 3, 4, 5})
 	head = ReverseList(head)
-	fmt.Println(head)
+	t.Log(PrintListNode(head))
 }
 
 func TestReverseBetween(t *testing.T) {
@@ -58,25 +51,10 @@ func TestReverseBetween(t *testing.T) {
 }
 
 func TestMergeTwoLists(t *testing.T) {
-	numsArr := [...]int{}
-	nums := make([]int, 0)
-	for _, v := range numsArr {
-		nums = append(nums, v)
-	}
-
-	l1 := NewListNode(nums)
-
-	numsArr2 := [...]int{}
-	nums = make([]int, 0)
-	for _, v := range numsArr2 {
-		nums = append(nums, v)
-	}
-
-	l2 := NewListNode(nums)
-
+	l1 := NewListNode([]int{1, 3, 5, 7, 9})
+	l2 := NewListNode([]int{2, 4})
 	head := MergeTwoLists(l1, l2)
-
-	fmt.Println(head)
+	t.Log(PrintListNode(head))
 }
 
 func TestPartition(t *testing.T) {
@@ -122,16 +100,8 @@ func TestReorderList(t *testing.T) {
 }
 
 func TestIsPalindrome(t *testing.T) {
-	numsArr := [...]int{1, 0, 1}
-	nums := make([]int, 0)
-	for _, v := range numsArr {
-		nums = append(nums, v)
-	}
-
-	head := NewListNode(nums)
-
+	head := NewListNode([]int{1, 0, 1, 2})
 	is := IsPalindrome(head)
-
 	fmt.Println(is)
 }
 
@@ -142,4 +112,17 @@ func TestAddTwoNumbers(t *testing.T) {
 	l2 := NewListNode(a2)
 
 	t.Log(PrintListNode(AddTwoNumbers(l1, l2)))
+}
+
+func TestDeleteNode(t *testing.T) {
+	l1 := NewListNode([]int{1, 2, 3, 4, 5, 6})
+	DeleteNode(l1.Next.Next.Next)
+	t.Log(PrintListNode(l1))
+}
+
+func TestRemoveNthFromEnd(t *testing.T) {
+	l1 := NewListNode([]int{1, 2, 3, 4, 5, 6, 7})
+	n := 7
+	l1 = RemoveNthFromEnd(l1, n)
+	t.Log(PrintListNode(l1))
 }
