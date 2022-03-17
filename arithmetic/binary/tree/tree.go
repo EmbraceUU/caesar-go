@@ -58,22 +58,8 @@ func reverseII(data []int) {
 	}
 }
 
-// --------------------------- 分界线 --------------------------- //
-
-// MaxDepth 求二叉树的最大深度
 func MaxDepth(root *Node) int {
-	if root == nil {
-		return 0
-	}
-
-	dl := MaxDepth(root.Left)
-	dr := MaxDepth(root.Right)
-
-	if dl > dr {
-		return dl + 1
-	} else {
-		return dr + 1
-	}
+	return maxDepth(root)
 }
 
 // --------------------------- 分界线 --------------------------- //

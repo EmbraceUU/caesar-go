@@ -3,7 +3,7 @@ package tree
 import "testing"
 
 func TestIsValidBSTII(t *testing.T) {
-	nums := []int{2, 1, 3}
+	nums := []int{2, 2, 2}
 	root := NewTreeNode(nums)
-	t.Log(IsValidBST(root))
+	t.Log(isValidBST(root))
 }
