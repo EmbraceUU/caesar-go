@@ -91,6 +91,10 @@ func IsSymmetric(root *Node) bool {
 	return isSymmetricIterative(root)
 }
 
+func SortedArrayToBST(nums []int) *Node {
+	return sortedArrayToBST(nums)
+}
+
 func max(a, b int) int {
 	if a > b {
 		return a
