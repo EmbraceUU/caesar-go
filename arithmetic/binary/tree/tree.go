@@ -87,6 +87,10 @@ func MaxPathSum(root *Node) int {
 	return maxSum
 }
 
+func IsSymmetric(root *Node) bool {
+	return isSymmetricIterative(root)
+}
+
 func max(a, b int) int {
 	if a > b {
 		return a
