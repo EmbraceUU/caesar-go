@@ -40,7 +40,7 @@ func (p *PriorityQueue) heapInsert(x int) {
 	i := len(*p) - 1
 	for {
 		parent := (i - 1) / 2
-		if parent == i || data[parent] > x {
+		if parent == i || data[parent] < x {
 			break
 		}
 		p.swap(parent, i)
@@ -64,12 +64,12 @@ func (p *PriorityQueue) heapify() {
 		// 判断最大值
 		j := left
 		// 判断右节点
-		if left+1 <= max && data[left+1] > data[left] {
+		if left+1 <= max && data[left+1] < data[left] {
 			j = left + 1
 		}
 
 		// 判断是否需要继续
-		if data[i] > data[j] {
+		if data[i] < data[j] {
 			break
 		}
 
