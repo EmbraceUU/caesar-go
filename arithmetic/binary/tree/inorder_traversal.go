@@ -2,7 +2,7 @@ package tree
 
 // InorderTraversal 中序遍历 迭代
 // https://leetcode-cn.com/problems/binary-tree-inorder-traversal/
-func InorderTraversal(root *Node) []int {
+func InorderTraversal(root *TreeNode) []int {
 	if root == nil {
 		return nil
 	}
@@ -14,7 +14,7 @@ func InorderTraversal(root *Node) []int {
 	// 有则开始以右节点压左边界
 
 	var res []int
-	stack := make([]*Node, 0)
+	stack := make([]*TreeNode, 0)
 
 	for len(stack) > 0 || root != nil {
 

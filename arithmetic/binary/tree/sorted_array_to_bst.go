@@ -2,14 +2,14 @@ package tree
 
 // sortedArrayToBST 108. 将有序数组转换为二叉搜索树
 // https://leetcode-cn.com/problems/convert-sorted-array-to-binary-search-tree
-func sortedArrayToBST(nums []int) *Node {
+func sortedArrayToBST(nums []int) *TreeNode {
 	// 分治法，二分法，将 nums 分为两部分，mid 为 root 节点
 	// 左右两侧再二分，left mid 为 left ，right mid 为 right
 	// 再细分下去
-	var divide func(start, end int, nums []int) *Node
-	divide = func(start, end int, nums []int) *Node {
+	var divide func(start, end int, nums []int) *TreeNode
+	divide = func(start, end int, nums []int) *TreeNode {
 		mid := start + (end-start)>>1
-		root := new(Node)
+		root := new(TreeNode)
 		root.Val = nums[mid]
 
 		if mid-1 >= start {

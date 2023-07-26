@@ -27,3 +27,34 @@ func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
 
 	return dummy.Next
 }
+
+func mergeTwoListsII(list1 *ListNode, list2 *ListNode) *ListNode {
+	// 设置一个dummy node
+	dummay := new(ListNode)
+	p := dummay
+	p1 := list1
+	p2 := list2
+
+	for p1 != nil && p2 != nil {
+		if p1.Val < p2.Val {
+			p.Next = p1
+			p1 = p1.Next
+			p = p.Next
+			continue
+		}
+
+		p.Next = p2
+		p2 = p2.Next
+		p = p.Next
+	}
+
+	if p1 != nil {
+		p.Next = p1
+	}
+
+	if p2 != nil {
+		p.Next = p2
+	}
+
+	return dummay.Next
+}

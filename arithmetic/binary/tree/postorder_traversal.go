@@ -2,14 +2,14 @@ package tree
 
 // PostorderTraversal 【后序遍历 非递归】
 // 左子树 -> 右子树 -> 根节点
-func PostorderTraversal(root *Node) []int {
+func PostorderTraversal(root *TreeNode) []int {
 	if root == nil {
 		return nil
 	}
 
 	result := make([]int, 0)
-	stack := make([]*Node, 0)
-	var lastVisit *Node
+	stack := make([]*TreeNode, 0)
+	var lastVisit *TreeNode
 
 	for root != nil || len(stack) > 0 {
 		// 先访问左子树
@@ -35,7 +35,7 @@ func PostorderTraversal(root *Node) []int {
 
 // PostorderTraversalII 后序遍历 迭代
 // https://leetcode-cn.com/problems/binary-tree-postorder-traversal/
-func PostorderTraversalII(root *Node) []int {
+func PostorderTraversalII(root *TreeNode) []int {
 	// 准备两个栈
 	// 一个栈用来遍历，一个栈用来存储结果
 	// 先把root压栈
@@ -47,7 +47,7 @@ func PostorderTraversalII(root *Node) []int {
 	}
 
 	var res []int
-	stack := make([]*Node, 0)
+	stack := make([]*TreeNode, 0)
 	stack = append(stack, root)
 
 	for len(stack) > 0 {

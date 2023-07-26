@@ -4,7 +4,7 @@ package tree
 // 分治法 + 递归
 // 判断条件 左边平衡 && 右边平衡 && 两边高度差 <= 1
 // 技巧: 返回数据二义性, 用-1表示不平衡, 用>=0表示高度
-func IsBalanced(root *Node) bool {
+func IsBalanced(root *TreeNode) bool {
 	if root == nil {
 		return true
 	}
@@ -16,7 +16,7 @@ func IsBalanced(root *Node) bool {
 	return true
 }
 
-func isBalanced(root *Node) int {
+func isBalanced(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}
@@ -42,12 +42,12 @@ func isBalanced(root *Node) int {
 // IsBalancedII 平衡二叉树
 // 一个二叉树每个节点 的左右两个子树的高度差的绝对值不超过 1 。
 // https://leetcode-cn.com/problems/balanced-binary-tree/
-func IsBalancedII(root *Node) bool {
+func IsBalancedII(root *TreeNode) bool {
 	isBFS, _ := isBalancedII(root)
 	return isBFS
 }
 
-func isBalancedII(root *Node) (bool, int) {
+func isBalancedII(root *TreeNode) (bool, int) {
 	if root == nil {
 		return true, 0
 	}

@@ -1,7 +1,7 @@
 package tree
 
 // maxDepth 借助【递归】和【深度优先遍历】
-func maxDepth(root *Node) int {
+func maxDepth(root *TreeNode) int {
 	if root == nil {
 		return 0
 	}

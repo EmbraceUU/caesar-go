@@ -7,7 +7,7 @@ package tree
 //  1）右节点存在时，左节点必存在
 //  2）当出现叶子节点后，以后必都是叶子节点
 // https://leetcode-cn.com/problems/check-completeness-of-a-binary-tree
-func IsCompleteTree(root *Node) bool {
+func IsCompleteTree(root *TreeNode) bool {
 	if root == nil {
 		return true
 	}
@@ -16,7 +16,7 @@ func IsCompleteTree(root *Node) bool {
 
 	// 利用队列，使用广度优先遍历
 
-	queue := make([]*Node, 0)
+	queue := make([]*TreeNode, 0)
 	queue = append(queue, root)
 	leaf := false
 

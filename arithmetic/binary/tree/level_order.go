@@ -4,7 +4,7 @@ package tree
 // 给你二叉树的根节点 root ，返回其节点值的 层序遍历 。
 // （即逐层地，从左到右访问所有节点）。
 // https://leetcode-cn.com/problems/binary-tree-level-order-traversal/
-func LevelOrder(root *Node) [][]int {
+func LevelOrder(root *TreeNode) [][]int {
 	if root == nil {
 		return nil
 	}
@@ -14,12 +14,12 @@ func LevelOrder(root *Node) [][]int {
 	// 然后将队列清空的同时，将出队列的节点的左右节点入队列
 
 	var res [][]int
-	queue := make([]*Node, 0)
+	queue := make([]*TreeNode, 0)
 	queue = append(queue, root)
 
 	for len(queue) > 0 {
 		level := make([]int, 0)
-		queueLevel := make([]*Node, 0)
+		queueLevel := make([]*TreeNode, 0)
 
 		for len(queue) > 0 {
 			cur := queue[0]
@@ -42,12 +42,12 @@ func LevelOrder(root *Node) [][]int {
 }
 
 // LevelOrderII BFS 改进版，但是内存消耗变大了
-func LevelOrderII(root *Node) [][]int {
+func LevelOrderII(root *TreeNode) [][]int {
 	result := make([][]int, 0)
 	if root == nil {
 		return nil
 	}
-	queue := make([]*Node, 0)
+	queue := make([]*TreeNode, 0)
 	queue = append(queue, root)
 	// 遍历当前层
 	for len(queue) > 0 {

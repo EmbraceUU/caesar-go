@@ -17,9 +17,9 @@ import "math"
 //		一种是用全局变量，并使用迭代。
 //		另外一种是使用类似动态规划的方式，在递归中将结果不断返回上层并修正的过程。这也是个二叉树解题模板。
 // https://leetcode-cn.com/problems/validate-binary-search-tree
-func isValidBST(root *Node) bool {
-	var valid func(root *Node, preVal int) (bool, int)
-	valid = func(root *Node, preVal int) (bool, int) {
+func isValidBST(root *TreeNode) bool {
+	var valid func(root *TreeNode, preVal int) (bool, int)
+	valid = func(root *TreeNode, preVal int) (bool, int) {
 		if root == nil {
 			// 这里应该返回 preVal，不能是 math.MinInt64
 			// 因为对于 Nil 节点，不能覆盖之前访问的 preVal
@@ -52,13 +52,13 @@ func isValidBST(root *Node) bool {
 
 // isValidBSTByIteration 判断搜索二叉树
 // 【迭代】【中序遍历】【栈】
-func isValidBSTByIteration(root *Node) bool {
+func isValidBSTByIteration(root *TreeNode) bool {
 	if root == nil {
 		return true
 	}
 
 	// 下面是中序遍历迭代的模板
-	stack := make([]*Node, 0)
+	stack := make([]*TreeNode, 0)
 	preVal := math.MinInt64
 
 	for len(stack) > 0 || root != nil {
@@ -87,9 +87,9 @@ func isValidBSTByIteration(root *Node) bool {
 
 // isValidBSTByDP 判断搜索二叉树
 // 使用深度DP的方式，在递归过程中，将需要的结果返回，并不断优化结果
-func isValidBSTByDP(root *Node) bool {
-	var valid func(root *Node) *IsValidBSTResult
-	valid = func(root *Node) *IsValidBSTResult {
+func isValidBSTByDP(root *TreeNode) bool {
+	var valid func(root *TreeNode) *IsValidBSTResult
+	valid = func(root *TreeNode) *IsValidBSTResult {
 		if root == nil {
 			return nil
 		}
@@ -131,9 +131,9 @@ type IsValidBSTResult struct {
 // isValidBSTByDPWithoutStruct 【动态规划】【递归】【不利用结构体】
 // 与 isValidBSTByDP 的不同之处是没有通过 IsValidBSTResult 来传递结果，而是通过多个变量的方式。
 // 有一种情况需要处理，就是 root 为nil时的判断方式
-func isValidBSTByDPWithoutStruct(root *Node) bool {
-	var valid func(node *Node) (bool, int, int)
-	valid = func(root *Node) (bool, int, int) {
+func isValidBSTByDPWithoutStruct(root *TreeNode) bool {
+	var valid func(node *TreeNode) (bool, int, int)
+	valid = func(root *TreeNode) (bool, int, int) {
 		if root == nil {
 			return true, 0, 0
 		}

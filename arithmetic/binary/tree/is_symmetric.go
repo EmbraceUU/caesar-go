@@ -2,11 +2,11 @@ package tree
 
 // isSymmetric 对称二叉树，不能用【迭代】的方式进行中序遍历得出，这样只能得到一个非空的序列
 // https://leetcode-cn.com/problems/symmetric-tree/
-func isSymmetric(root *Node) bool {
+func isSymmetric(root *TreeNode) bool {
 	// 使用【递归】的方式
 	// 自己的左子树 == 自己的右子树
-	var symmetric func(n1 *Node, n2 *Node) bool
-	symmetric = func(n1 *Node, n2 *Node) bool {
+	var symmetric func(n1 *TreeNode, n2 *TreeNode) bool
+	symmetric = func(n1 *TreeNode, n2 *TreeNode) bool {
 		if n1 == nil && n2 == nil {
 			return true
 		}
@@ -23,8 +23,8 @@ func isSymmetric(root *Node) bool {
 }
 
 // isSymmetricIterative 【迭代】，同样需要对比自己的左和右
-func isSymmetricIterative(root *Node) bool {
-	queue := make([]*Node, 0)
+func isSymmetricIterative(root *TreeNode) bool {
+	queue := make([]*TreeNode, 0)
 	queue = append(queue, root.Left, root.Right)
 
 	for len(queue) > 0 {

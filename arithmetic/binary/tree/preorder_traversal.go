@@ -3,7 +3,7 @@ package tree
 import "fmt"
 
 // PreorderTraversal 【前序遍历 递归】
-func PreorderTraversal(root *Node) {
+func PreorderTraversal(root *TreeNode) {
 	if root == nil {
 		return
 	}
@@ -16,11 +16,11 @@ func PreorderTraversal(root *Node) {
 }
 
 // PreorderTraversalII 【前序遍历 非递归】
-func PreorderTraversalII(root *Node) {
+func PreorderTraversalII(root *TreeNode) {
 	if root == nil {
 		return
 	}
-	stack := make([]*Node, 0)
+	stack := make([]*TreeNode, 0)
 	for root != nil || len(stack) >= 0 {
 		for root != nil {
 			// 访问当前节点
@@ -42,12 +42,12 @@ func PreorderTraversalII(root *Node) {
 // DFS中 关键点是【递归以及回溯】
 // 采用递归的方式, 先分别递归返回结果, 然后合并结果, 合并的时候, 可以控制访问的顺序
 // 可以简单的实现 preorder/inorder/postorder 这三种顺序
-func PreorderTraversalIII(root *Node) []int {
+func PreorderTraversalIII(root *TreeNode) []int {
 	result := divideAndConquer(root)
 	return result
 }
 
-func divideAndConquer(root *Node) []int {
+func divideAndConquer(root *TreeNode) []int {
 	var result []int
 	if root == nil {
 		return nil
@@ -65,7 +65,7 @@ func divideAndConquer(root *Node) []int {
 // PreorderTraversalIV 前序遍历，迭代
 // 左神的思路
 // https://leetcode-cn.com/problems/binary-tree-preorder-traversal/
-func PreorderTraversalIV(root *Node) []int {
+func PreorderTraversalIV(root *TreeNode) []int {
 	var res []int
 
 	if root == nil {
@@ -75,7 +75,7 @@ func PreorderTraversalIV(root *Node) []int {
 	// 如果想非递归的方式遍历二叉树，
 	// 就需要借助栈来代替递归中的调用栈，
 	// 先把root压栈
-	stack := make([]*Node, 0)
+	stack := make([]*TreeNode, 0)
 	stack = append(stack, root)
 
 	for len(stack) > 0 {
