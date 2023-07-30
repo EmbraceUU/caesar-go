@@ -22,3 +22,25 @@ func removeDuplicates(nums []int) int {
 
 	return k + 1
 }
+
+func RemoveDuplicatesII(nums []int) int {
+	// 快慢指针
+	// p1 是唯一元素的个数
+	// p2 是当前遍历的进度
+	// 1，2，3，4，5，5，5，6
+	p := 0
+	for i := 1; i < len(nums); i++ {
+		// 如果一样，i++
+		// 如果不一样，p++，i位置覆盖到p位置
+		if nums[p] == nums[i] {
+			continue
+		}
+
+		p++
+		if p != i {
+			nums[p] = nums[i]
+		}
+	}
+	p++
+	return p
+}

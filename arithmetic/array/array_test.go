@@ -43,3 +43,8 @@ func TestRotateImage(t *testing.T) {
 	RotateImage(matrix)
 	t.Log(matrix)
 }
+
+func TestRemoveDuplicatesII(t *testing.T) {
+	nums := []int{0, 0, 1, 1, 1, 2, 2, 3, 3, 4}
+	t.Log(RemoveDuplicatesII(nums))
+}
