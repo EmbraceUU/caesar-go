@@ -52,3 +52,31 @@ func moveZeroes(nums []int) {
 
 	moveMerge(nums, 0, len(nums)-1)
 }
+
+func moveZeroesII(nums []int) {
+	fast, slow := 0, 0
+	// 1,1,0,3,12
+	for fast < len(nums) {
+		for slow < len(nums) && nums[slow] != 0 {
+			slow++
+			fast++
+		}
+		if nums[slow] == 0 && nums[fast] != 0 {
+			nums[slow], nums[fast] = nums[fast], nums[slow]
+			slow++
+		}
+		fast++
+	}
+}
+
+func moveZeroesIII(nums []int) {
+	fast, slow := 0, 0
+	// 1,1,0,3,12
+	for fast < len(nums) {
+		if nums[fast] != 0 {
+			nums[slow], nums[fast] = nums[fast], nums[slow]
+			slow++
+		}
+		fast++
+	}
+}

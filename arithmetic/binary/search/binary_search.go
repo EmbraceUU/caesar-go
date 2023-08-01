@@ -36,6 +36,25 @@ func BinarySearch(nums []int, target int) int {
 	return index
 }
 
+func binarySearch(nums []int, target int) int {
+	left, right := 0, len(nums)-1
+	for left <= right {
+		mid := left + (right-left)>>1
+		if nums[mid] == target {
+			return mid
+		}
+		if nums[mid] < target {
+			left = mid + 1
+			continue
+		}
+		if nums[mid] > target {
+			right = mid - 1
+			continue
+		}
+	}
+	return -1
+}
+
 // BinarySearchII 模板二
 // 这个模板更常用一些，可以查找target出现的第一次，最后一次，或者出现的次数统计等。
 // 如果没有以上要求，可以直接用模板一。

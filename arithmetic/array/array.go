@@ -9,7 +9,7 @@ func PlusOne(nums []int) []int {
 }
 
 func MoveZeroes(nums []int) {
-	moveZeroes(nums)
+	moveZeroesII(nums)
 }
 
 func RotateImage(matrix [][]int) {

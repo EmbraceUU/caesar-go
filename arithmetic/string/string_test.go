@@ -2,6 +2,11 @@ package string
 
 import "testing"
 
+func TestLongestPalindrome(t *testing.T) {
+	str := "babc"
+	t.Log(longestPalindrome(str))
+}
+
 func TestLongestCommonPrefix(t *testing.T) {
 	strs := []string{
 		"faslea",
