@@ -59,7 +59,7 @@ func reverseII(data []int) {
 }
 
 func MaxDepth(root *TreeNode) int {
-	return maxDepth(root)
+	return maxDepthII(root)
 }
 
 // --------------------------- 分界线 --------------------------- //
