@@ -75,3 +75,36 @@ func LevelOrderII(root *TreeNode) [][]int {
 	}
 	return result
 }
+
+func levelOrder(root *TreeNode) [][]int {
+	if root == nil {
+		return nil
+	}
+
+	result := make([][]int, 0)
+	queue := make([]*TreeNode, 0)
+	queue = append(queue, root)
+	levelNum := 1
+	var levelResult []int
+
+	for len(queue) > 0 {
+		levelResult = make([]int, 0)
+
+		for levelNum > 0 {
+			current := queue[0]
+			queue = queue[1:]
+			levelNum--
+
+			levelResult = append(levelResult, current.Val)
+			if current.Left != nil {
+				queue = append(queue, current.Left)
+			}
+			if current.Right != nil {
+				queue = append(queue, current.Right)
+			}
+		}
+		result = append(result, levelResult)
+		levelNum = len(queue)
+	}
+	return result
+}
