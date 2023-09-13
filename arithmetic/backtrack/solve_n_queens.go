@@ -11,13 +11,11 @@ func solveNQueens(n int) [][]string {
 	record := make([]string, 0, n)
 	// 记录每列选择情况，来判断竖列
 	usedX := make([]bool, n)
-	// 记录上一层的位置，来判断对角线
-	lastIdx := -1
-	bt2(&result, record, usedX, lastIdx, n)
+	bt2(&result, record, usedX, n)
 	return result
 }
 
-func bt2(result *[][]string, record []string, usedX []bool, lastIdx int, n int) {
+func bt2(result *[][]string, record []string, usedX []bool, n int) {
 	// 判断是否结束
 	// 一共n列，到达n列结束
 	// 结束不一定正确
@@ -44,7 +42,7 @@ func bt2(result *[][]string, record []string, usedX []bool, lastIdx int, n int) 
 		usedX[i] = true
 		record = append(record, getRecord(i, n))
 		//	bt2
-		bt2(result, record, usedX, i, n)
+		bt2(result, record, usedX, n)
 		//  删除记录
 		usedX[i] = false
 		record = record[:len(record)-1]
