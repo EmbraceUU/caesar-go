@@ -12,3 +12,9 @@ func TestSubsets(t *testing.T) {
 	result := Subsets(nums)
 	t.Log(result)
 }
+
+func TestCombine(t *testing.T) {
+	n, k := 1, 1
+	result := combine(n, k)
+	t.Log(result)
+}
