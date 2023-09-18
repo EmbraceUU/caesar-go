@@ -18,3 +18,9 @@ func TestCombine(t *testing.T) {
 	result := combine(n, k)
 	t.Log(result)
 }
+
+func TestSubsetsWithDup(t *testing.T) {
+	nums := []int{1, 2, 2}
+	result := subsetsWithDup(nums)
+	t.Log(result)
+}
