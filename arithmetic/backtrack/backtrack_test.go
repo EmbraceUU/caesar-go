@@ -20,7 +20,13 @@ func TestCombine(t *testing.T) {
 }
 
 func TestSubsetsWithDup(t *testing.T) {
-	nums := []int{1, 2, 2}
+	nums := []int{4, 4, 4, 1, 4}
 	result := subsetsWithDup(nums)
+	t.Log(result)
+	t.Log("[[],[1],[1,4],[1,4,4],[1,4,4,4],[1,4,4,4,4],[4],[4,4],[4,4,4],[4,4,4,4]]")
+}
+
+func TestCombinationSum2(t *testing.T) {
+	result := combinationSum2([]int{10, 1, 2, 7, 6, 1, 5}, 8)
 	t.Log(result)
 }
