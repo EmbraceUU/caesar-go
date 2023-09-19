@@ -30,3 +30,8 @@ func TestCombinationSum2(t *testing.T) {
 	result := combinationSum2([]int{10, 1, 2, 7, 6, 1, 5}, 8)
 	t.Log(result)
 }
+
+func TestPermuteUnique(t *testing.T) {
+	result := permuteUnique([]int{1, 1, 2})
+	t.Log(result)
+}
