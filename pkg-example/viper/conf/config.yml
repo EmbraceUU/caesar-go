@@ -1,0 +1,30 @@
+httpClient:
+  trace: true
+  proxy: 'http://127.0.0.1:9090'
+  timeout: 60
+
+postgres:
+  host: 'baidu.com'
+  port: !!str 8081
+  userName: 'ijxudkwejs*ksue'
+  password: '8isje92ks'
+  dataBase: 'base-ssss'
+
+bridgePoolI:
+  concurrence: 500
+  expiredDuration: 20
+
+bridgePoolII:
+  concurrence: 200
+  expiredDuration: 60
+
+aPIServer:
+  port: !!str 7789
+  readTimeOut: 20
+  writeTimeOut: 30
+  proxy: 'http://iksje.com:999'
+
+file:
+  apiFilePath: 'api-db'
+  nodeFilePath: 'node-db1'
+  chainFilePath: 'chain-db1'
