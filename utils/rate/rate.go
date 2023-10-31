@@ -7,13 +7,13 @@ import (
 )
 
 func WaitN() {
-	limit := rate.NewLimiter(0.2, 1)
+	limit := rate.NewLimiter(120, 8)
 	for {
 		if limit.Allow() {
 			fmt.Println("log:event happen", time.Now())
 		} else {
 			fmt.Println("log:event not allow", time.Now())
 		}
-		time.Sleep(time.Second * 1)
+		time.Sleep(time.Millisecond * 1)
 	}
 }

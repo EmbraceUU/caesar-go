@@ -2,6 +2,7 @@ module caesar-go
 
 require (
 	github.com/fsnotify/fsnotify v1.6.0
+	github.com/gin-gonic/gin v1.7.7
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/olivere/elastic/v7 v7.0.26
 	github.com/onsi/ginkgo v1.16.5 // indirect
@@ -13,4 +14,4 @@ require (
 	golang.org/x/time v0.3.0
 )
 
-go 1.15
+go 1.20
